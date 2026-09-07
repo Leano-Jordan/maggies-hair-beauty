@@ -1,0 +1,1 @@
+// Booking form enhancement is included in main.js for V1.

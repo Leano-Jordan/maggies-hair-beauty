@@ -1,0 +1,1 @@
+// Gallery filtering is included in main.js for V1.

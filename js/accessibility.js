@@ -1,0 +1,1 @@
+// Reduced-motion support and focus styles are handled in CSS.
