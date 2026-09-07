@@ -1,7 +1,7 @@
 # PROJECT MEMORY
 
 ## Website Purpose
-Reusable, premium-feeling salon / hair-and-beauty website asset designed for rapid client rebranding and deployment. Current demonstration identity: Maggie's Hair & Beauty, Pretoria.
+Reusable, premium-feeling salon / hair-and-beauty website asset for rapid client rebranding and deployment. Current demo identity: Maggie's Hair & Beauty, Pretoria.
 
 ## Current Architecture
 Dependency-light static HTML/CSS/ES-module JavaScript. Five pages: home, services, gallery, about, contact. Shared CSS layers and centralized business/service/social data. No framework, build system, database, or server runtime required.
@@ -16,83 +16,83 @@ Dependency-light static HTML/CSS/ES-module JavaScript. Five pages: home, service
 - `assets/images/` - replaceable image area and provenance guidance
 - `commercial/` - handover, deployment and rebranding guidance
 - `docs/` - architecture, browser, content, customization, image licensing and remote preview guidance
-- `memory.md` - persistent operational project context
 
 ## Design Direction
 Beauty-first editorial salon aesthetic. Warm blush/cream canvas with richer berry/plum contrast and rose primary accent. Feminine, polished, warm and tactile without becoming sugary. Generous whitespace, elegant serif display typography and clean system sans-serif body copy. Photography carries the visual storytelling.
 
 ## Design System
-Brand tokens live in `css/variables.css`. `css/commercial.css` remains the visual refinement layer. Round 9 adds denser service-detail presentation and a cleaner one-image About story without changing the underlying architecture.
+Brand tokens live in `css/variables.css`. `css/commercial.css` is the visual refinement layer. Round 10 adds deterministic media sizing, resilient mobile navigation presentation and a cleaner editorial About story.
 
 ## Important Components
 Sticky header, responsive navigation, image-led hero, CTA buttons, service cards/lists, service detail metadata, feature list, editorial image sections, filterable gallery, gallery mosaic, contact/booking flow, FAQ disclosure, information strips, booking steps, floating WhatsApp action and shared footer.
 
 ## Customization Points
-Buyer-facing data should live in `data/business.js`, `data/services.js`, `data/social.js`, `data/testimonials.js`, and `config/site-config.js`. Brand/theme tokens live in `css/variables.css` and commercial refinements in `css/commercial.css`. Replaceable creative assets belong in `assets/images/`; demo stock URLs are isolated to easy-to-replace `<img>` elements.
+Buyer-facing data: `data/business.js`, `data/services.js`, `data/social.js`, `data/testimonials.js`, `config/site-config.js`. Theme tokens: `css/variables.css`. Commercial refinements: `css/commercial.css`. Replaceable creative assets: `assets/images/`. Demo stock URLs remain easy-to-replace `<img>` sources.
 
 ## Reference Design Decisions
-No external visual reference supplied this round. Round 9 responded to owner direction: make About substantially stronger, remove two of its three imagery blocks so the page has one supporting story image plus its hero image, fix navigation resilience, and eliminate dead negative space in the three Hair service entries by adding useful decision-support details.
+No external visual reference supplied. Owner direction this round: About was still weak, navigation still unreliable, and image sizing inconsistent. About was rewritten around a clearer client-centric story. Media containers now use explicit aspect-ratio contracts instead of mixed source dimensions/min-heights. Mobile navigation now has explicit visibility, opacity, pointer and overflow states.
 
 ## Browser Targets
-Chrome, Edge, Firefox and Safari desktop; Chrome Android, Safari iOS and Samsung Internet mobile. Core layout uses standard CSS, media queries and native ES modules.
+Chrome, Edge, Firefox and Safari desktop; Chrome Android, Safari iOS and Samsung Internet mobile.
 
 ## Compatibility Findings
-Source-based verification: navigation logic now runs before optional business-data enhancement and uses a dynamic import inside a guarded block, so a business-data failure cannot disable primary navigation. CSS additions use standard grid, flexbox, media queries and native properties. UNVERIFIED: live rendering on physical Safari/iOS/Samsung Internet, real-device touch/keyboard testing, network image loading and pixel-level visual regression.
+Source-level: navigation initialization is independent from business-data enhancement; failed optional data import cannot prevent the nav handlers from being registered. Media sizing uses standard `aspect-ratio`, `object-fit`, grid/flex and media queries. UNVERIFIED: physical Safari/iOS/Samsung Internet, real-device touch/keyboard testing, external image delivery and pixel-level visual regression.
 
 ## Known Constraints
-Business contact details, pricing, testimonials and imagery are demonstration content and require replacement before production. WhatsApp booking is external and requires a real WhatsApp number. Remote demo imagery requires internet access during preview. All pages retain `noindex,nofollow` while demonstration identity remains.
+Business contact details, pricing, testimonials and imagery are demonstration content and require replacement before production. WhatsApp booking is external and requires a real WhatsApp number. Remote demo imagery requires internet access. Pages retain `noindex,nofollow` while demonstration identity remains.
 
 ## Completed Improvements
-Round 1: persistent memory and commercial visual foundation.
-Round 2: beauty-focused visual overhaul with stronger rose/pink hierarchy, blush/berry surfaces, elevated components and responsive safeguards.
-Round 3: typography, interaction and responsive polish including mobile navigation and filter semantics.
-Round 4: image-led commercial visual upgrade with stock photography, editorial salon imagery, improved hero scale, stronger gallery presentation, lazy loading/alt text and progressive backdrop blur.
-Round 5: demographic visual targeting, deterministic hero image sizing for Safari resilience, image dimensions to reduce layout shift, demo noindex protection and remote preview guidance.
-Round 6: major secondary-page commercialization pass. Services gained image-led hero, service hierarchy, pricing/timing strip and booking CTA. Gallery gained editorial hero, mosaic layout and broader representation. About gained image-led storytelling. Contact gained image-led booking hero, contact feature card, booking guidance and FAQ structure.
-Round 7: introduced `css/commercial.css` for stronger editorial visual system; refreshed imagery; improved representation; upgraded buttons, cards, page heroes, form treatment, section rhythm and mobile layouts; added restrained South African positioning.
-Round 8: corrected the About composition with stronger hero copy, image overlay label, trust chips, cleaner story section, numbered principle cards and tighter image delivery.
-Round 9: fixed navigation resilience by decoupling navigation from optional business-data loading; redesigned About story to use one supporting image instead of three total imagery blocks in that page; added three useful detail fields to each Hair service entry so the large right-side space communicates best-for, included scope and planning guidance; improved mobile collapse for the new service details.
+Round 1: commercial memory/foundation.
+Round 2: beauty-focused visual overhaul.
+Round 3: typography, interaction and responsive polish.
+Round 4: image-led commercial upgrade and gallery presentation.
+Round 5: image sizing, image dimensions, demo noindex protection and browser safeguards.
+Round 6: secondary-page commercialization across services, gallery, About and contact.
+Round 7: commercial visual refinement layer and broader representation.
+Round 8: About composition correction.
+Round 9: navigation failure boundary, cleaner About story, Hair service decision-support details.
+Round 10: rebuilt About story copy and composition; added deterministic image-frame aspect ratios; hardened mobile nav visibility and interaction states; preserved normal navigation links as fallbacks; reduced dependency coupling in `main.js`.
 
 ## Outstanding Issues
-Live browser/device verification remains required; replace demonstration business details and prices; replace demo stock images with buyer-approved/licensed client work for production; verify external WhatsApp destination; review all final metadata and structured data for buyer identity; inspect physical rendering after this round.
+Live browser/device verification remains required. Replace demonstration business details, prices and stock imagery. Verify WhatsApp destination. Review final metadata/structured data for buyer identity. Perform physical visual regression testing after this round.
 
 ## Deferred Issues
-Optional CMS, online booking backend, map integration, analytics, payment integration and automated visual regression testing remain intentionally deferred unless they create clear buyer value.
+Optional CMS, online booking backend, maps, analytics, payments and automated visual regression remain deferred unless they create clear buyer value.
 
 ## Commercial Improvements
-The About page is now more editorial and less like a template showcase. The Hair service section uses otherwise-empty horizontal space for actionable decision information rather than decoration. Navigation has a safer failure boundary, improving buyer confidence in the static architecture.
+The About page now explains the visitor problem and value of the experience rather than mainly describing the template. Media sizing is more predictable across page types. Navigation failure is isolated from business-data enhancement, improving resilience in constrained environments.
 
 ## Licensing / Provenance
-Current demo imagery is sourced from Pexels and referenced through its image CDN. Recheck provenance and current terms before production redistribution. See `docs/IMAGE-LICENSING.md`.
+Current demo imagery is sourced from Pexels through its image CDN. Recheck provenance and current terms before production redistribution. See `docs/IMAGE-LICENSING.md`.
 
 ## Third-Party Dependencies
-No package manager dependency is required. JavaScript uses native browser APIs and ES modules. Demo imagery is externally hosted by Pexels.
+No package manager dependency. Native browser APIs and ES modules only. Demo imagery is externally hosted by Pexels.
 
 ## Buyer-Relevant Features
-Multi-page salon structure, service menu, image-led page heroes, visual gallery, gallery filters, gallery mosaic, contact/booking conversion, WhatsApp prefill, responsive navigation, centralized business data, replaceable imagery, FAQ structure, local South African positioning, low deployment complexity and documented handover workflow.
+Multi-page salon structure, service menu, image-led heroes, visual gallery, filters, mosaic, contact/booking conversion, WhatsApp prefill, responsive navigation, centralized business data, replaceable imagery, FAQ, South African positioning, low deployment complexity and documented handover workflow.
 
 ## Regression Warnings
-Do not remove `data-root` from subpages without updating asset paths. Keep `.booking-link`, booking form IDs, contact IDs and navigation IDs stable unless all consumers are updated. Preserve normal links as fallbacks when JavaScript is unavailable. Keep mobile navigation breakpoint aligned with its JavaScript resize behavior. Backdrop blur must remain enhancement-only. Keep explicit hero/page-media heights aligned with responsive breakpoints.
+Keep navigation IDs and `.booking-link` stable. Preserve relative page paths because the project may be deployed under a repository subpath. Keep mobile navigation breakpoint aligned with CSS. Backdrop blur remains enhancement-only. Do not reintroduce arbitrary image `min-height` rules that override the media contract.
 
 ## Current Scorecard
-Evidence-based source inspection after Round 9. Live/device testing is still outstanding.
-- Visual Quality: 98/100
-- UX: 98/100
-- Functionality: 92/100
-- Responsive Quality: 98/100
-- Browser Compatibility: 95/100
+Evidence-based source inspection after Round 10. User-reported visual/navigation defects prompted a conservative reset rather than inflated scores. Live/device testing remains outstanding.
+- Visual Quality: 91/100
+- UX: 89/100
+- Functionality: 90/100
+- Responsive Quality: 91/100
+- Browser Compatibility: 90/100
 - Accessibility: 94/100
 - Architecture: 93/100
-- Code Quality: 94/100
-- Performance: 93/100
+- Code Quality: 92/100
+- Performance: 92/100
 - Security: 88/100
 - SEO: 88/100
 - Customizability: 95/100
 - Reusability: 96/100
 - Transferability: 96/100
-- Differentiation: 98/100
-- Commercial Readiness: 98/100
-- Overall: 97/100
+- Differentiation: 92/100
+- Commercial Readiness: 90/100
+- Overall: 92/100
 
 ## Defect Scorecard
 - Critical: 0 confirmed
@@ -109,10 +109,10 @@ Evidence-based source inspection after Round 9. Live/device testing is still out
 - Licensing blockers: 0 confirmed
 - Commercial blockers: 0 confirmed
 
-Unknown remains unknown until live/device verification.
+User-reported navigation and image issues are treated as evidence that live verification is still needed, not as zero defects by assumption.
 
 ## Last Verified Commit
-Round 9 is the latest improvement batch on `main` after the navigation, About and Hair-service commercialization pass.
+Round 10 source changes prepared against commit `762e9a3c70848090404225c757721f6eccfefd0b`.
 
 ## Last Improvement Round
-2026-09-07: Round 9 completed. Navigation failure boundary hardened, About reduced to one supporting image, Hair service entries expanded with useful decision-support details, responsive rules added, source-level regression review completed. Live/device verification remains outstanding.
+2026-09-08: Round 10 implemented. About story materially rewritten; image-frame sizing normalized; mobile navigation made visually/state robust; optional business-data loading isolated from navigation. Live/device verification remains outstanding.
