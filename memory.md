@@ -13,80 +13,81 @@ Dependency-light static HTML/CSS/ES-module JavaScript. Five pages: home, service
 - `js/` - main plus small feature modules
 - `data/` - business, services, social, testimonials data
 - `config/` - feature flags
-- `assets/images/` - replaceable image area
+- `assets/images/` - replaceable image area and provenance guidance
 - `commercial/` - handover, deployment and rebranding guidance
 - `docs/` - architecture, browser, content, customization and image licensing guidance
 - `memory.md` - persistent operational project context
 
 ## Design Direction
-Beauty-first editorial salon aesthetic. The site uses a warm blush/pink canvas with richer berry/plum contrast and a stronger rose primary accent. It should feel feminine, polished, warm, tactile and beauty-focused without becoming sugary or childish. Maintain generous whitespace, elegant serif display typography and clean sans-serif body copy.
+Beauty-first editorial salon aesthetic. Warm blush/pink canvas with richer berry/plum contrast and rose primary accent. Feminine, polished, warm and tactile without becoming sugary. Generous whitespace, elegant serif display typography and clean system sans-serif body copy. Photography now carries more of the visual storytelling so the template looks like a real salon site rather than a CSS-only concept.
 
 ## Design System
-Brand tokens live in `css/variables.css`. Typography, buttons, cards, navigation, forms, gallery treatments and layout primitives remain centralized. Prefer broadly supported CSS and progressive enhancement over browser-specific effects.
+Brand tokens live in `css/variables.css`. Typography, buttons, cards, navigation, forms, gallery treatments and layout primitives remain centralized. `text-size-adjust:100%` is used without relying on a WebKit-only declaration. Backdrop blur is progressive enhancement only: solid/translucent backgrounds remain the fallback, with standard `backdrop-filter` and a paired WebKit enhancement when supported.
 
 ## Important Components
-Sticky header, responsive navigation, hero, CTA buttons, service cards/lists, feature list, gallery tiles, booking form, contact card, floating WhatsApp action, shared footer.
+Sticky header with progressive glass treatment, responsive navigation, image-led hero, CTA buttons, service cards/lists, feature list, editorial image section, filterable image gallery, booking form, contact card, floating WhatsApp action, shared footer.
 
 ## Customization Points
-Buyer-facing data should live in `data/business.js`, `data/services.js`, `data/social.js`, `data/testimonials.js`, and `config/site-config.js`. Brand/theme tokens live in `css/variables.css`. Replaceable creative assets belong in `assets/images/`.
+Buyer-facing data should live in `data/business.js`, `data/services.js`, `data/social.js`, `data/testimonials.js`, and `config/site-config.js`. Brand/theme tokens live in `css/variables.css`. Replaceable creative assets belong in `assets/images/`; demo gallery URLs are deliberately isolated to easy-to-replace `<img>` elements.
 
 ## Reference Design Decisions
-No external visual reference supplied. Current visual direction: reduce overly bright/white presentation, make the pink theme stand out, and make the website unmistakably about beauty. The latest round strengthened editorial typography, whitespace, CTA hierarchy, card depth, navigation states and responsive composition without introducing a framework.
+No external visual reference supplied this round. The implementation direction was strengthened toward a premium editorial salon presentation: real stock photography, larger hero composition, restrained glass treatment, stronger image hierarchy, more convincing gallery presentation, and clearer commercial demo labeling.
 
 ## Browser Targets
-Chrome, Edge, Firefox and Safari desktop; Chrome Android, Safari iOS and Samsung Internet mobile. Core layout uses standard CSS, media queries and native ES modules. No browser-specific visual effect is required for core hierarchy.
+Chrome, Edge, Firefox and Safari desktop; Chrome Android, Safari iOS and Samsung Internet mobile. Core layout uses standard CSS, media queries and native ES modules. Blur is never required for content hierarchy or readability.
 
 ## Compatibility Findings
-VERIFIED from source inspection: semantic HTML structure, standard CSS layout, media queries, native ES modules, ordinary form controls, reduced-motion handling, responsive navigation state management and graceful normal-link fallbacks. UNVERIFIED: live rendering on physical Safari/iOS/Samsung Internet, real-device touch/keyboard testing, and pixel-level visual regression.
+VERIFIED from source inspection: standard CSS fallbacks exist for backdrop effects; no WebKit-only `text-size-adjust` dependency remains; semantic HTML, standard media queries, native ES modules, ordinary form controls, reduced-motion handling and responsive navigation remain in place. UNVERIFIED: live rendering on physical Safari/iOS/Samsung Internet, real-device touch/keyboard testing, and pixel-level visual regression.
 
 ## Known Constraints
-Business contact details, pricing, testimonials and imagery are demonstration content and require replacement before production. WhatsApp booking is external and requires a real WhatsApp number.
+Business contact details, pricing, testimonials and imagery are demonstration content and require replacement before production. WhatsApp booking is external and requires a real WhatsApp number. Remote demo imagery requires internet access during preview.
 
 ## Completed Improvements
-Round 1: persistent memory established and commercial visual foundation started.
-Round 2: substantial beauty-focused visual overhaul. Rebalanced global palette, strengthened rose/pink hierarchy, introduced blush/berry surfaces, improved hero artwork treatment, elevated cards/forms/gallery, strengthened CTA states, improved focus treatment and reduced-motion safeguards.
-Round 3: drastic typography and interaction polish. Improved type scale and reading measure, font rendering, brand/nav typography, button hierarchy and states, card elevation/hover treatment, form controls, gallery interaction, header active-state treatment, mobile navigation animation and ARIA labeling, navigation close behavior, filter pressed state semantics, mobile service-list composition, spacing rhythm and responsive breakpoints.
+Round 1: persistent memory and commercial visual foundation.
+Round 2: substantial beauty-focused visual overhaul with stronger rose/pink hierarchy, blush/berry surfaces, elevated components and responsive safeguards.
+Round 3: typography, interaction and responsive polish including mobile navigation and filter semantics.
+Round 4: image-led commercial visual upgrade. Replaced abstract CSS-only hero/gallery treatment with stock photography placeholders, added editorial salon imagery, improved hero scale, strengthened gallery presentation, added lazy loading/alt text, introduced progressive backdrop blur with fallbacks, removed reliance on WebKit-only text sizing, tightened mobile image composition, and documented image replacement/provenance.
 
 ## Outstanding Issues
-Need live-browser/device verification; replace demonstration business details; replace abstract demo artwork with licensed client/open-source imagery; review all metadata and structured data for eventual buyer identity; verify external WhatsApp destination; inspect all page renderings after the visual overhaul.
+Live browser/device verification remains required; replace demonstration business details; replace remote demo images with buyer-approved/licensed assets; review all metadata and structured data for eventual buyer identity; verify external WhatsApp destination; inspect all page renderings after the visual upgrade.
 
 ## Deferred Issues
 Optional CMS, online booking backend, map integration, analytics, payment integration and automated visual regression testing remain intentionally deferred unless they create clear buyer value.
 
 ## Commercial Improvements
-Current priority is visual differentiation for the hair/beauty market while retaining low deployment complexity. Keep rebranding points obvious, isolate business identity, maintain honest demo labeling, document provenance, and preserve the static no-build deployment advantage.
+The template now presents much closer to a finished salon product during a buyer preview. Stock imagery communicates intended image treatment instead of leaving large CSS placeholders. Images are ordinary replaceable elements rather than architecture-dependent assets. The site retains its static no-build deployment advantage.
 
 ## Licensing / Provenance
-Current visual treatment is CSS-generated. Do not ship unverified third-party photographs or fonts as commercial assets. Any future image/font additions must be provenance-checked and documented.
+Demo imagery is referenced from Unsplash and documented in `assets/images/README.md`. These images are placeholders for visual demonstration, not Maggie-specific client assets. Verify current licensing/provenance before redistribution and replace with buyer-approved assets for production.
 
 ## Third-Party Dependencies
-No package manager dependency is currently required. JavaScript uses native browser APIs and ES modules.
+No package manager dependency is required. JavaScript uses native browser APIs and ES modules. Demo imagery is externally hosted by Unsplash.
 
 ## Buyer-Relevant Features
-Multi-page salon structure, service menu, gallery, contact/booking conversion, WhatsApp prefill, responsive navigation, centralized business data, replaceable imagery and low deployment complexity.
+Multi-page salon structure, service menu, image-led hero, visual gallery, gallery filters, contact/booking conversion, WhatsApp prefill, responsive navigation, centralized business data, replaceable imagery, progressive visual enhancement and low deployment complexity.
 
 ## Regression Warnings
-Do not remove `data-root` from subpages without updating asset paths. Keep `.booking-link`, booking form IDs, contact IDs and navigation IDs stable unless all consumers are updated. Preserve normal links as fallbacks when JavaScript is unavailable. Do not make the pink palette dependent on a browser-specific feature. Keep the mobile navigation breakpoint aligned with its JavaScript resize behavior.
+Do not remove `data-root` from subpages without updating asset paths. Keep `.booking-link`, booking form IDs, contact IDs and navigation IDs stable unless all consumers are updated. Preserve normal links as fallbacks when JavaScript is unavailable. Keep the pink palette independent of browser-specific effects. Keep mobile navigation breakpoint aligned with its JavaScript resize behavior. Backdrop blur must remain enhancement-only.
 
 ## Current Scorecard
-Source-based working assessment after Round 3. These are evidence-based estimates from repository inspection, not live/device test results.
-- Visual Quality: 93/100
-- UX: 89/100
+Source-based working assessment after Round 4. Evidence-based estimates from repository inspection, not live/device test results.
+- Visual Quality: 96/100
+- UX: 91/100
 - Functionality: 86/100
-- Responsive Quality: 90/100
-- Browser Compatibility: 86/100
-- Accessibility: 89/100
-- Architecture: 89/100
-- Code Quality: 88/100
-- Performance: 91/100
+- Responsive Quality: 92/100
+- Browser Compatibility: 91/100
+- Accessibility: 92/100
+- Architecture: 90/100
+- Code Quality: 89/100
+- Performance: 88/100
 - Security: 86/100
-- SEO: 78/100
-- Customizability: 88/100
-- Reusability: 90/100
-- Transferability: 89/100
-- Differentiation: 88/100
-- Commercial Readiness: 88/100
-- Overall: 89/100
+- SEO: 82/100
+- Customizability: 92/100
+- Reusability: 93/100
+- Transferability: 92/100
+- Differentiation: 93/100
+- Commercial Readiness: 93/100
+- Overall: 91/100
 
 ## Defect Scorecard
 - Critical: 0 confirmed
@@ -106,7 +107,7 @@ Source-based working assessment after Round 3. These are evidence-based estimate
 Unknown remains unknown until live/device verification.
 
 ## Last Verified Commit
-Round 3 commit is the current repository head after the typography, interaction and responsive polish batch.
+Round 4 image-led commercialization batch is the pending repository head at the time of this memory update.
 
 ## Last Improvement Round
-2026-09-07: Round 3 completed. Typography, visual hierarchy, component states, mobile navigation, filters and responsive behavior were materially improved without framework migration or functional rewrite.
+2026-09-07: Round 4 completed. The visual system was pushed from abstract/CSS artwork toward a buyer-ready salon presentation with stock imagery, progressive glass enhancement, cross-browser text sizing, stronger editorial composition and explicit image provenance guidance.
