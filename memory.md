@@ -104,7 +104,7 @@ Evidence-based source inspection after Round 12. Physical browser/device testing
 These are source-level findings, not proof of physical-device perfection. External image availability, live WhatsApp routing and browser pixel fidelity remain unverified.
 
 ## Last Verified Commit
-Round 12 commit `a0c23b47fa869795ea1be3cc4d0431714c870443`.
+Round 12 final documentation commit `fe26550812badc90bd6b826ea0e8ec0a9a8c67eb` (preceded by implementation commit `a0c23b47fa869795ea1be3cc4d0431714c870443`).
 
 ## Last Improvement Round
 2026-09-08: Round 12 restored stable commercial CSS behaviour and removed About-page photographs after the owner reported Services/About CSS regressions. Main branch was updated and the result was re-read from GitHub.
