@@ -10,6 +10,7 @@ Before production delivery:
 3. Remove unused demo image references where the buyer does not want external hosting.
 4. Keep image replacement points intact so the design does not need restructuring.
 5. Do not introduce AI-generated imagery as a substitute for real stock or client photography.
+6. The official Proudly South African logo is not bundled in this demo. Public membership guidance states that approved members receive access to the official brand assets. If a buyer is an approved member and wants the official mark, obtain the official asset from the organisation/member portal and follow its current brand guidelines.
 
 Current demo source: Pexels (`https://www.pexels.com/`).
 
