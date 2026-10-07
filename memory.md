@@ -110,4 +110,13 @@ Mags Director System installed in `MAGS_DIRECTOR_SYSTEM.md` and wired into `AGEN
 Director-system installation commits: `78d1b377afefb34c9f5de3cc5676e5d546803ae5` (AGENTS), `9761761deb2a732a46df0df2402d0c1e1f85337f` (director system), `ca6bdf71f7d4965707257e116e57d66280280d51` (manifest). Prior Round 12 implementation/documentation commits remain historical baseline references.
 
 ## Last Improvement Round
-2026-09-08: Round 12 restored stable commercial CSS behaviour and removed About-page photographs after the owner reported Services/About CSS regressions. Main branch was updated and the result was re-read from GitHub.
+2026-10-08: Round 13 refactored site initialization/booking enhancement, hardened relative imports and progressive fallback behaviour, and synchronized the booking service fallback.
+
+## Improvement Round 13 — 2026-10-08
+- Refactored `js/main.js` into explicit initialization functions for navigation, year, gallery filters, media fallbacks, business data and service data.
+- Added root-aware dynamic imports so shared JavaScript remains correct from both root and `pages/` URLs.
+- Made the existing `site-config.js` feature flags materially govern booking/WhatsApp enhancement instead of being decorative configuration.
+- Hardened booking input handling: local-date minimum is timezone-safe, service selection is validated before WhatsApp handoff, and generated content remains DOM/API-based rather than unsafe HTML injection.
+- Preserved progressive enhancement: navigation, contact links and booking page remain reachable without JavaScript; contact service fallback now includes every current service.
+- Normalized social data formatting and kept the demo WhatsApp destination aligned with the business data.
+- Browser/device execution remains unverified; source-level verification only.
