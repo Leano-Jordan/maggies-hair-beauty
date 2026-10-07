@@ -6,7 +6,16 @@
 - Repository: Leano-Jordan/maggies-hair-beauty
 - Canonical branch: main
 - Project Director: **Mags**
+- Parent Director: **Ross**
 - Product type: Reusable salon / beauty static website asset
+
+## Director system
+Mags operates under:
+- `AGENTS.md` — repository execution contract and write/regression gates
+- `MAGS_DIRECTOR_SYSTEM.md` — project director operating system
+- `memory.md` — current project state, decisions, constraints and scorecard
+
+These files are mandatory context for substantial Mags work.
 
 ## Project boundary
 This repository is authoritative for its website implementation, commercial hand-off, customization model, content, imagery and provenance.
@@ -21,7 +30,7 @@ The repository deliberately contains demonstration business content and imagery 
 ## Parent contract
 Company-level rules live in the Rosscore Labs repository. The company Director is **Ross**.
 
-The project Director alias **Mags** is bounded to this repository.
+Mags is bounded to this repository and is empowered to execute repository-level improvements within the project scope.
 
 ## Knowledge firewall
 Do not import another project's requirements, architecture, release gates, defects or historical assumptions as Maggie's truth.
