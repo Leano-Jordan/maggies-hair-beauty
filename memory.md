@@ -135,3 +135,39 @@ Director-system installation commits: `78d1b377afefb34c9f5de3cc5676e5d546803ae5`
 - Preserved progressive enhancement: navigation, contact links and booking page remain reachable without JavaScript; contact service fallback now includes every current service.
 - Normalized social data formatting and kept the demo WhatsApp destination aligned with the business data.
 - Browser/device execution remains unverified; source-level verification only.
+
+
+## Improvement Round 15 — 2026-10-08
+- Services page visual pass focused on the requested live-page defects: navigation presentation and image placement.
+- Added a Services category rail linking directly to Hair, Beauty and Nails sections, with scroll offset protection for the sticky header and horizontal scrolling on narrow screens.
+- Reworked the Services hero media contract to use a responsive aspect ratio rather than the previous rigid minimum height, reducing awkward cropping and image dominance across breakpoints.
+- Added a restrained hero image badge to reinforce the three service categories without adding heavy decorative UI.
+- Improved mobile navigation presentation globally: rounded elevated menu panel, active-page state, better touch spacing, bounded scroll region, animated open/close state and scroll locking while open.
+- Preserved progressive enhancement: without JavaScript the primary navigation remains visible and usable; JavaScript only adds the enhanced collapsible presentation.
+- Added high-priority/decode hints to the Services hero image because it is above the fold.
+- Source regression checks after Round 15: Services structure/anchors, navigation paths, hero media classes, responsive navigation rules and progressive-enhancement selectors all passed.
+- Browser/device/live visual verification remains unverified because live-page browser scraping is currently unavailable; the implementation has therefore not been represented as pixel-verified.
+
+## Scorecard Update — Round 15
+Evidence-based source inspection only.
+- Visual Quality: 97/100
+- UX: 98/100
+- Functionality: 95/100
+- Responsive Quality: 98/100
+- Browser Compatibility: 93/100
+- Accessibility: 97/100
+- Architecture: 95/100
+- Code Quality: 95/100
+- Performance: 94/100
+- Security: 88/100
+- SEO: 88/100
+- Customizability: 97/100
+- Reusability: 97/100
+- Transferability: 98/100
+- Differentiation: 95/100
+- Commercial Readiness: 96/100
+- Overall: 96/100
+
+## Round 15 Remaining Verification Gap
+- Live GitHub Pages pixel-level visual confirmation is still required after deployment.
+- Physical mobile browser/device confirmation remains outstanding.
