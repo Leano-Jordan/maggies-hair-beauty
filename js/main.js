@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 const q = (selector, scope = document) => scope.querySelector(selector);
 const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
@@ -82,6 +84,45 @@ const initGalleryFilters = () => {
       item.hidden = button.dataset.filter !== 'all' && item.dataset.category !== button.dataset.filter;
     });
   }));
+};
+
+const initGalleryLightbox = () => {
+  const dialog = q('#gallery-lightbox');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+
+  const image = q('#lightbox-image', dialog);
+  const title = q('#lightbox-title', dialog);
+  const close = q('.gallery-lightbox-close', dialog);
+  if (!image || !title || !close) return;
+
+  let trigger = null;
+
+  const closeDialog = () => {
+    if (dialog.open) dialog.close();
+    trigger?.focus();
+    trigger = null;
+  };
+
+  qa('.gallery-tile[data-lightbox]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      trigger = link;
+      image.src = link.href;
+      image.alt = link.querySelector('img')?.alt || link.textContent.trim();
+      title.textContent = link.querySelector('span')?.textContent.trim() || image.alt;
+      dialog.showModal();
+      close.focus();
+    });
+  });
+
+  close.addEventListener('click', closeDialog);
+  dialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeDialog();
+  });
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) closeDialog();
+  });
 };
 
 const initialiseBusiness = async (business, config) => {
@@ -171,6 +212,7 @@ const initialiseServices = async (services, config) => {
 initNavigation();
 initYear();
 initGalleryFilters();
+initGalleryLightbox();
 initMediaFallbacks();
 
 Promise.all([
