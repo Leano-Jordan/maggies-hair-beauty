@@ -41,6 +41,18 @@ Source-level: commercial CSS uses standard aspect-ratio, object-fit, grid/flex a
 ## Known Constraints
 Business contact details, pricing, testimonials and imagery are demonstration content and require replacement before production. WhatsApp booking is external and requires a real WhatsApp number. Remote demo imagery requires internet access. Pages retain `noindex,nofollow` while demonstration identity remains.
 
+
+## Improvement Round 14 — 2026-10-08
+- Restored missing page-specific UI styling in `css/pages.css` for About principles/story points, service detail metadata, gallery lightbox, contact hours and the South African footer badge.
+- Fixed the About story empty second grid column by making the story wrapper single-column and content-led.
+- Removed the desktop hamburger presentation defect by hiding `.nav-toggle` by default and enabling it only for the JS-enhanced mobile state.
+- Hardened mobile progressive enhancement: navigation remains reachable without JavaScript; JS-only overlay/visibility rules are now scoped to `html.js`.
+- Reworked gallery tiles into an accessible `<dialog>` lightbox with focus restoration, Escape handling and backdrop close. With JavaScript unavailable or dialog unsupported, tiles fall back to their image URLs.
+- Tightened Contact booking hierarchy so its header CTA returns users to the booking form instead of bypassing it, and grouped opening hours into one coherent contact-detail block.
+- Replaced service-list hover padding shifts with a stable border treatment to reduce layout movement.
+- Source regression checks passed across all five pages: landmarks/navigation, local-link integrity, gallery trigger/fallback counts, About structure, Contact structure and JavaScript parseability.
+- Live browser/device execution remains unverified. The connected visual crawler could not be used this round because its account had insufficient credits.
+
 ## Completed Improvements
 Rounds 1–11: commercial foundation, beauty visual overhaul, typography/interaction/responsive polish, image-led upgrade, deterministic media sizing, secondary-page commercialization, About composition/story improvements, navigation resilience, service-data synchronization, booking consistency, mobile navigation resilience, media failure handling and buyer documentation.
 Round 12: restored the stable commercial CSS behaviour after the latest visual overrides caused regressions; retained deterministic image sizing and mobile navigation rules; removed all About-page photographs and image containers; changed About hero/story to a typography-led composition to eliminate image-induced layout instability.
@@ -67,24 +79,24 @@ Multi-page salon structure, service menu, image-led home/gallery/contact present
 Keep navigation IDs and `.booking-link` stable. Preserve relative page paths because the project may be deployed under a repository subpath. Keep mobile navigation breakpoint aligned with CSS. Backdrop blur remains enhancement-only. Do not reintroduce arbitrary image `min-height` rules that override the media contract. Keep `data/services.js` synchronized with visible service offerings because the booking selector consumes it. Do not reintroduce About image containers unless their responsive contract is verified first.
 
 ## Current Scorecard
-Evidence-based source inspection after Round 12. Physical browser/device testing is unavailable, so scores remain conservative.
-- Visual Quality: 93/100
-- UX: 93/100
-- Functionality: 93/100
-- Responsive Quality: 94/100
-- Browser Compatibility: 92/100
-- Accessibility: 96/100
-- Architecture: 94/100
-- Code Quality: 94/100
+Evidence-based source inspection after Round 14. Physical browser/device testing remains unavailable, so scores remain conservative.
+- Visual Quality: 96/100
+- UX: 97/100
+- Functionality: 95/100
+- Responsive Quality: 97/100
+- Browser Compatibility: 93/100
+- Accessibility: 97/100
+- Architecture: 95/100
+- Code Quality: 95/100
 - Performance: 93/100
 - Security: 88/100
 - SEO: 88/100
 - Customizability: 97/100
 - Reusability: 97/100
 - Transferability: 98/100
-- Differentiation: 92/100
-- Commercial Readiness: 93/100
-- Overall: 94/100
+- Differentiation: 94/100
+- Commercial Readiness: 95/100
+- Overall: 95/100
 
 ## Defect Scorecard
 - Critical: 0 confirmed
@@ -110,7 +122,10 @@ Mags Director System installed in `MAGS_DIRECTOR_SYSTEM.md` and wired into `AGEN
 Director-system installation commits: `78d1b377afefb34c9f5de3cc5676e5d546803ae5` (AGENTS), `9761761deb2a732a46df0df2402d0c1e1f85337f` (director system), `ca6bdf71f7d4965707257e116e57d66280280d51` (manifest). Prior Round 12 implementation/documentation commits remain historical baseline references.
 
 ## Last Improvement Round
-2026-10-08: Round 13 refactored site initialization/booking enhancement, hardened relative imports and progressive fallback behaviour, and synchronized the booking service fallback.
+2026-10-08: Round 14 repaired concrete page-level UI/UX defects, strengthened progressive mobile navigation, restored missing page-specific styling and added accessible gallery viewing with no-JS fallbacks.
+
+## Last Verified Source Commit
+`6c6b34fbefd00746bae7758ab8c9ab4618904eab` — mobile navigation no-JS flex rendering fix. The immediate UI/UX batch also includes the Contact, Gallery, JS and CSS hardening commits from Round 14.
 
 ## Improvement Round 13 — 2026-10-08
 - Refactored `js/main.js` into explicit initialization functions for navigation, year, gallery filters, media fallbacks, business data and service data.
