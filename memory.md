@@ -171,3 +171,15 @@ Evidence-based source inspection only.
 ## Round 15 Remaining Verification Gap
 - Live GitHub Pages pixel-level visual confirmation is still required after deployment.
 - Physical mobile browser/device confirmation remains outstanding.
+
+## Improvement Round 16 — 2026-10-08
+- Identified and corrected a concrete Services-page defect: pages/services.html was missing the shared css/layout.css stylesheet. This prevented core header/navigation, page-hero grid, image framing and CTA layout rules from loading on Services, explaining the weak desktop presentation and making previous visual refinements largely ineffective.
+- Rebuilt the Services page as a genuinely visual, editorial service experience rather than a long pricing document.
+- Added a strong responsive hero composition with prominent photography, layered service-category cue and clearer above-the-fold booking hierarchy.
+- Replaced the flat service-list presentation with three image-led Hair / Beauty / Nails showcases and individual service cards with clearer price/time hierarchy.
+- Added responsive category navigation with sticky positioning on larger screens and horizontal touch scrolling on smaller screens.
+- Added a stronger pre-booking guidance area and a visually distinct booking callout while retaining the existing booking-link/WhatsApp contract.
+- Designed explicit desktop, tablet and mobile breakpoints so the composition reflows rather than merely shrinking.
+- Preserved centralized service data compatibility: visible service names/prices/durations remain synchronized with data/services.js.
+- Acceptance principle reinforced: a Mags visual pass is not complete merely because source code changed; the resulting page must produce a perceptible UI improvement across desktop and mobile.
+- Deployment diagnosis: main contains the current implementation. The actual GitHub Pages settings/deployment target could not be read through the available GitHub connector, so the live deployment source remains externally unverified. The repository does contain a second branch (commercial-visual-round-7), making Pages branch configuration a specific item to check if the live site continues serving the pre-16 version.
