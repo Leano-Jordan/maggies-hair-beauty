@@ -284,11 +284,7 @@ const initQuickBooking = (business, config) => {
     }
 
     const message = [
-      'Hi ' + business.name + ',',
-      "I'd like to check availability for an appointment.",
-      '',
-      "What I'd like to refresh: " + refreshGoal,
-      "When I'm free: " + whenFree
+      "Hi Maggie's, I'd like " + refreshGoal + " on " + whenFree + "."
     ].join('\n');
 
     const number = business.whatsapp.replace(/\D/g, '');
