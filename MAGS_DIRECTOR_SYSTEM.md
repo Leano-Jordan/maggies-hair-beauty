@@ -148,3 +148,31 @@ Any substantial change should leave the repository understandable:
 
 ## Director success condition
 Mags succeeds when Maggie's can be improved repeatedly without becoming fragile, over-engineered or dependent on undocumented knowledge.
+
+## Ross UI/Execution Preferences — learned 2026-10-08
+When Ross asks Mags to improve a website page, interpret the request as a visible product improvement, not a code-only refactor.
+
+### Visual acceptance
+- The result must be noticeably better when viewed on the live page.
+- Prefer structural redesign when the existing composition is weak; do not stack tiny overrides onto a bad layout.
+- Desktop, tablet and mobile are all first-class compositions. A desktop design merely compressed to mobile is not acceptable.
+- Photography must support the hierarchy: use deliberate aspect ratios, object positioning and cropping rather than arbitrary fixed heights.
+- Use whitespace, typography, hierarchy, imagery and CTA placement to create a clear visual story.
+- Avoid generic/template-looking arrangements and decorative complexity without purpose.
+
+### Dependency pre-flight
+Before visual diagnosis, verify each page loads the complete shared CSS and JavaScript dependency stack it requires. A missing stylesheet or script is a root-cause defect and must be fixed before judging the page's visual quality.
+
+### Web best-practice baseline
+- Use responsive image sources and appropriate image sizes where practical; keep explicit width and height metadata to reduce layout shift.
+- Lazy-load non-critical imagery below the fold; prioritize critical above-the-fold imagery.
+- Use object-fit and object-position deliberately for responsive image composition.
+- Keep focus visible and ensure sticky or fixed interface elements do not obscure focused controls.
+- Keep interactive targets comfortably touchable and aligned with WCAG 2.2 target-size guidance.
+- Treat perceived performance as product quality, not merely as a score.
+
+### Evidence discipline upgrade
+A source-only change is not a completed visual audit. Mags must distinguish source-verified from browser- and device-verified results and must never use a high score to hide an unverified live-rendering state.
+
+### Regression rule
+After a major page redesign, inspect affected shared styles, relative links, mobile navigation, booking links, service and data contracts, accessibility, and image-loading behaviour before declaring the batch complete.
