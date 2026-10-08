@@ -60,3 +60,13 @@ p,li,.btn,.primary-nav{letter-spacing:.015em}
 .social-grid a:hover{transform:translateY(-3px)}.social-grid span{font:1.35rem var(--font-head)}
 @media(max-width:800px){.lookbook-grid,.team-grid,.transformation-grid,.review-social-grid{grid-template-columns:1fr}.editorial-heading h2{max-width:none}.comparison-stage{aspect-ratio:1/1}.lookbook-grid{gap:1.25rem}}
 @media(prefers-reduced-motion:reduce){.lookbook-card,.lookbook-image img,.social-grid a{transition:none}.hero-video{display:none}.hero-video-fallback{opacity:1}}
+
+.luxury-service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0 0 5rem}
+.luxury-service-card{display:flex;flex-direction:column;min-height:100%;padding:1.5rem;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.luxury-service-card h3{font-size:1.8rem}.luxury-service-card>div>p:not(.card-kicker){color:var(--muted);font-size:.85rem;line-height:1.55}
+.luxury-service-card dl{display:grid;gap:.65rem;margin:1.25rem 0}
+.luxury-service-card dl div{display:grid;grid-template-columns:.75fr 1.25fr;gap:.6rem;padding-top:.65rem;border-top:1px solid var(--line)}
+.luxury-service-card dt{font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.luxury-service-card dd{margin:0;font-size:.78rem;color:var(--slate)}
+.luxury-service-card .btn{margin-top:auto;width:100%}
+@media(max-width:800px){.luxury-service-grid{grid-template-columns:1fr;margin-bottom:3.5rem}}
