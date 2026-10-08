@@ -1,7 +1,4 @@
-# Maggie's Hair & Beauty — demo deployment
-# This repository contains fictional/demo business information.
-# Keep the demo out of search indexes until verified production identity,
-# contact details, imagery and business claims are supplied.
-
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://leano-jordan.github.io/maggies-hair-beauty/sitemap.xml
