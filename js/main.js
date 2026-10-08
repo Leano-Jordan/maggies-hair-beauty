@@ -5,7 +5,15 @@ const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)]
 
 const MOBILE_BREAKPOINT = 800;
 const root = document.body?.dataset.root || '';
-const getBookingPath = () => root ? root + 'contact.html' : 'pages/contact.html';
+const getContactPath = () => root ? root + 'contact.html' : 'pages/contact.html';
+const getContactUrl = () => new URL(getContactPath(), window.location.href);
+const isCurrentContactPage = () => {
+  const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+  const contactPath = getContactUrl().pathname.replace(/\/+$/, '') || '/';
+  return currentPath === contactPath;
+};
+const getBookingPath = () => isCurrentContactPage() ? '#booking' : getContactPath() + '#booking';
+const getLocationPath = () => isCurrentContactPage() ? '#visit' : getContactPath() + '#visit';
 const getWhatsAppNumber = (business) => String(business?.whatsapp || '').replace(/\D/g, '');
 const isUsableExternalUrl = (value) => {
   try { return ['http:', 'https:'].includes(new URL(String(value || '')).protocol); }
@@ -105,20 +113,24 @@ const initVerifiedProof = (business, config) => {
   });
 };
 
-const initMediaFallbacks = () => {
-  qa('img').forEach((image) => {
-    image.addEventListener('error', () => {
-      const frame = image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media, .about-hero-art');
-      frame?.classList.add('media-failed');
-      if (frame && !frame.querySelector('.media-fallback')) {
-        const fallback = document.createElement('span');
-        fallback.className = 'media-fallback';
-        fallback.setAttribute('role', 'status');
-        fallback.textContent = 'Image unavailable';
-        frame.append(fallback);
-      }
-    }, { once:true });
-  });
+const bindMediaFallback = (image) => {
+  if (!image || image.dataset.mediaFallbackBound === 'true') return;
+  image.dataset.mediaFallbackBound = 'true';
+  image.addEventListener('error', () => {
+    const frame = image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media, .about-hero-art, .transformation-card, .transformation-pair');
+    frame?.classList.add('media-failed');
+    if (frame && !frame.querySelector('.media-fallback')) {
+      const fallback = document.createElement('span');
+      fallback.className = 'media-fallback';
+      fallback.setAttribute('role', 'status');
+      fallback.textContent = 'Image unavailable';
+      frame.append(fallback);
+    }
+  }, { once:true });
+};
+
+const initMediaFallbacks = (scope = document) => {
+  qa('img', scope).forEach(bindMediaFallback);
 };
 
 const initGalleryFilters = () => {
@@ -196,7 +208,7 @@ const initStickyActions = (business = {}, config = {}) => {
 
   const location = document.createElement('a');
   location.className = 'mobile-action location-link';
-  location.href = isUsableExternalUrl(business?.mapUrl) ? business.mapUrl : (getBookingPath() + '#visit');
+  location.href = isUsableExternalUrl(business?.mapUrl) ? business.mapUrl : getLocationPath();
   location.setAttribute('aria-label', 'Open salon location');
   location.innerHTML = '<span aria-hidden="true">⌖</span><span>Location</span>';
 
@@ -207,6 +219,7 @@ const initStickyActions = (business = {}, config = {}) => {
 
   bar.append(booking, location);
   document.body.append(bar);
+  document.body.classList.add('has-mobile-action-bar');
 };
 
 const initServiceAccordions = () => {
@@ -230,6 +243,7 @@ const initServiceBookLinks = () => {
       event.preventDefault();
       const target = new URL(link.getAttribute('href') || 'contact.html', window.location.href);
       target.searchParams.set('service', service);
+      target.hash = 'booking';
       window.location.href = target.href;
     });
   });
@@ -271,12 +285,20 @@ const initBookingForm = (business = {}, config = {}) => {
     }
     date?.setCustomValidity('');
 
-    const displayDate = preferredDate
-      ? new Intl.DateTimeFormat('en-ZA', { weekday:'long', day:'numeric', month:'long' }).format(new Date(preferredDate + 'T12:00:00'))
-      : 'Not specified';
+    let displayDate = 'Not specified';
+    if (preferredDate) {
+      const parsedDate = new Date(preferredDate + 'T12:00:00');
+      if (Number.isNaN(parsedDate.getTime())) {
+        date?.setCustomValidity('Please choose a valid date.');
+        date?.reportValidity();
+        return;
+      }
+      displayDate = new Intl.DateTimeFormat('en-ZA', { weekday:'long', day:'numeric', month:'long' }).format(parsedDate);
+    }
 
+    const businessName = String(business?.name || "Maggie's Hair & Beauty").trim();
     const message = [
-      "Hi Maggie's, I'd like " + serviceName + " on " + displayDate + " at " + (preferredTime || 'a flexible time') + ".",
+      "Hi " + businessName + ", I'd like " + serviceName + " on " + displayDate + " at " + (preferredTime || 'a flexible time') + ".",
       notes ? "Notes: " + notes : ""
     ].filter(Boolean).join('\n');
 
@@ -314,8 +336,9 @@ const initQuickBooking = (business = {}, config = {}) => {
       return;
     }
 
+    const businessName = String(business?.name || "Maggie's Hair & Beauty").trim();
     const message = [
-      "Hi Maggie's, I'd like " + refreshGoal + " on " + whenFree + "."
+      "Hi " + businessName + ", I'd like " + refreshGoal + " on " + whenFree + "."
     ].join('\n');
 
     const number = getWhatsAppNumber(business);
@@ -374,6 +397,16 @@ const initialiseBusiness = async (business = {}, config = {}) => {
     }
   }
 
+  const directFallback = q('.booking-direct-fallback');
+  if (directFallback) {
+    const fallbackUrl = config.enableWhatsApp && number
+      ? 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage)
+      : getBookingPath();
+    directFallback.href = fallbackUrl;
+    directFallback.target = config.enableWhatsApp && number ? '_blank' : '';
+    directFallback.rel = config.enableWhatsApp && number ? 'noopener noreferrer' : '';
+  }
+
   const mapLink = q('#contact-map-link');
   if (mapLink) {
     const mapAvailable = Boolean(config.enableMap && isUsableExternalUrl(business?.mapUrl));
@@ -390,18 +423,42 @@ const initialiseBusiness = async (business = {}, config = {}) => {
   initQuickBooking(business, config);
 };
 
-const populateServiceSelect = (select, services) => {
-  if (!select || !Array.isArray(services)) return;
-  const options = [new Option('Choose a service', '')];
+const getValidServices = (services) => {
+  if (!Array.isArray(services)) return [];
+  return services.flatMap((group) => {
+    if (!group || typeof group !== 'object' || !Array.isArray(group.services)) return [];
+    const category = String(group.category || '').trim();
+    return group.services
+      .filter((service) => service && typeof service === 'object' && String(service.name || '').trim())
+      .map((service) => ({
+        ...service,
+        name: String(service.name).trim(),
+        price: String(service.price || '').trim(),
+        category
+      }));
+  });
+};
 
-  services.flatMap((group) => group.services.map((service) => ({
-    ...service,
-    category: group.category
-  }))).forEach((service) => {
-    options.push(new Option(service.name + ' · ' + service.price, service.name));
+const populateServiceSelect = (select, services) => {
+  if (!select) return 0;
+  const validServices = getValidServices(services);
+  const options = validServices.length
+    ? [new Option('Choose a service', '')]
+    : [new Option('Services temporarily unavailable', '')];
+
+  if (!validServices.length) {
+    options[0].disabled = true;
+    options[0].selected = true;
+  }
+
+  validServices.forEach((service) => {
+    const label = service.price ? service.name + ' · ' + service.price : service.name;
+    options.push(new Option(label, service.name));
   });
 
   select.replaceChildren(...options);
+  select.disabled = validServices.length === 0;
+  return validServices.length;
 };
 
 const initialiseServices = async (services, config = {}) => {
@@ -418,6 +475,14 @@ const initialiseServices = async (services, config = {}) => {
     if (matching) {
       bookingSelect.value = matching.value;
       q('#booking-selection')?.replaceChildren(document.createTextNode('Selected service: ' + matching.textContent));
+    }
+  }
+
+  if (bookingSelect && ![...bookingSelect.options].some((option) => option.value)) {
+    const feedback = q('#booking-feedback');
+    if (feedback) {
+      feedback.hidden = false;
+      feedback.textContent = 'Services are temporarily unavailable. Please use the salon contact details above.';
     }
   }
 
@@ -504,6 +569,7 @@ const initPortfolio = (portfolio, config) => {
     q('span',figure).textContent = item.category || 'Transformation';
     return figure;
   }));
+  initMediaFallbacks(grid);
 };
 
 const initSocialProof = (testimonials, config) => {
