@@ -446,23 +446,6 @@ const initComparisonSliders = () => {
   });
 };
 
-const initLuxuryMotionLegacy = () => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const layers = qa('[data-parallax]');
-  if (!layers.length) return;
-  let ticking = false;
-  const update = () => {
-    const y = Math.min(window.scrollY * 0.06, 28);
-    layers.forEach((layer) => layer.style.transform = 'translate3d(0,' + y + 'px,0)');
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(update);
-  }, { passive: true });
-};
-
 const initPortfolio = (portfolio, config) => {
   const section = q('[data-transformations]');
   if (!section || !config.enableGallery || !Array.isArray(portfolio?.transformations)) return;
@@ -529,4 +512,3 @@ const initReviewWidget = (business) => {
 };
 
 initComparisonSliders();
-initLuxuryMotionLegacy();
