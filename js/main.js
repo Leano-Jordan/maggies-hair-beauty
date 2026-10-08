@@ -420,12 +420,23 @@ const initialiseBusiness = async (business = {}, config = {}) => {
 
   const directFallback = q('.booking-direct-fallback');
   if (directFallback) {
-    const fallbackUrl = config.enableWhatsApp && number
-      ? 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage)
-      : getBookingPath();
-    directFallback.href = fallbackUrl;
-    directFallback.target = config.enableWhatsApp && number ? '_blank' : '';
-    directFallback.rel = config.enableWhatsApp && number ? 'noopener noreferrer' : '';
+    const hasWhatsApp = Boolean(config.enableWhatsApp && number);
+    const phone = String(business?.phone || '').trim();
+    if (hasWhatsApp) {
+      directFallback.hidden = false;
+      directFallback.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
+      directFallback.target = '_blank';
+      directFallback.rel = 'noopener noreferrer';
+      directFallback.textContent = 'Prefer WhatsApp directly? Open the chat →';
+    } else if (phone) {
+      directFallback.hidden = false;
+      directFallback.href = 'tel:' + phone.replace(/[^+\d]/g, '');
+      directFallback.target = '';
+      directFallback.rel = '';
+      directFallback.textContent = 'Prefer a call? Call the salon →';
+    } else {
+      directFallback.hidden = true;
+    }
   }
 
   const mapLink = q('#contact-map-link');
