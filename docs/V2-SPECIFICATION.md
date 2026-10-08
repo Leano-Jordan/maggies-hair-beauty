@@ -365,7 +365,7 @@ For production-ready deployments, provide:
 - `sitemap.xml`;
 - appropriate LocalBusiness/BeautySalon structured data using factual information only.
 
-Demo environments should remain appropriately non-indexable until production identity and content are ready.
+The configured Maggie’s site may be indexable once the supplied production identity is confirmed; unsupported proof claims remain gated until verified.
 
 ---
 
