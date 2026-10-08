@@ -134,21 +134,42 @@ const initGalleryLightbox = () => {
 };
 
 const initStickyActions = (business, config) => {
-  if (!document.body || !config.enableBooking) return;
-  if (q('.mobile-action-bar')) return;
+  if (!document.body || !config.enableBooking || q('.mobile-action-bar')) return;
 
   const bar = document.createElement('div');
   bar.className = 'mobile-action-bar';
-  bar.innerHTML =
-    '<a class="mobile-action booking-link" href="' + root + 'contact.html"><span aria-hidden="true">WA</span><span>Fast booking</span></a>' +
-    '<a class="mobile-action location-link" href="' + (business.mapUrl || (root + 'contact.html#visit')) + '" aria-label="Open salon location"><span aria-hidden="true">⌖</span><span>Location</span></a>';
 
-  document.body.append(bar);
+  const booking = document.createElement('a');
+  booking.className = 'mobile-action booking-link';
+  booking.href = root + 'contact.html';
+  booking.innerHTML = '<span aria-hidden="true">WA</span><span>Fast booking</span>';
+
+  const location = document.createElement('a');
+  location.className = 'mobile-action location-link';
+  location.href = business.mapUrl || (root + 'contact.html#visit');
+  location.setAttribute('aria-label', 'Open salon location');
+  location.innerHTML = '<span aria-hidden="true">⌖</span><span>Location</span>';
+
   if (business.mapUrl) {
-    const location = q('.mobile-action.location-link', bar);
     location.target = '_blank';
     location.rel = 'noopener noreferrer';
   }
+
+  bar.append(booking, location);
+  document.body.append(bar);
+};
+
+const initServiceAccordions = () => {
+  qa('.service-detail-list').forEach((list) => {
+    qa('details', list).forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        qa('details', list).forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  });
 };
 
 const initServiceBookLinks = () => {
@@ -327,6 +348,7 @@ initYear();
 initGalleryFilters();
 initGalleryLightbox();
 initMediaFallbacks();
+initServiceAccordions();
 initServiceBookLinks();
 
 Promise.all([
