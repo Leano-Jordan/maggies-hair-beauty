@@ -9,5 +9,11 @@ export const business={
   address:"Akasia, Pretoria North, Gauteng, South Africa",
   mapUrl:"https://www.google.com/maps/search/?api=1&query=Akasia%2C%20Pretoria%20North%2C%20Gauteng",
   openingHours:[],
+  proof:{
+    googleRating:null,
+    googleReviewCount:null,
+    whatsappResponseTime:null
+  },
+  refillOffer:"",
   bookingMessage:"Hi Maggie's Hair & Beauty, I'd like [Service] on [Date] at [Time]."
 };
