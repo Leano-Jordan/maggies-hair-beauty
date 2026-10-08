@@ -172,3 +172,10 @@ When stopped, state exactly what remains and why.
 
 ## Parent contract
 Company-wide Rosscore Labs rules belong to Ross. This contract is the project-specific execution layer for Mags and may be stricter than the parent contract, but must not contradict it.
+
+
+## Design identity rule
+
+The company web standard is `Leano-Jordan/Rosscore-Labs/docs/ROSCOR_WEB_PRODUCT_DESIGN_STANDARD.md`.
+
+**Rosscore standardizes quality, not appearance.** Mags must establish project-specific Design DNA before major visual work and run the Anti-Slop Check before acceptance. Reuse engineering and product disciplines; do not automatically reuse another Rosscore project's branding, visual language or composition.
