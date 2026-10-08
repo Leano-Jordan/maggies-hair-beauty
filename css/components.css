@@ -136,3 +136,13 @@
 
 /* Consistent warm-neutral editorial grade */
 .hero-image,.lookbook-image img,.gallery-tile img,.page-hero-media img,.services-hero-image img,.service-showcase-media img,.contact-photo img,.about-hero-image{filter:saturate(.9) sepia(.03) contrast(1.01)}
+
+
+/* Defect hardening: explicit media and booking failure states */
+.media-failed{position:relative;display:grid;place-items:center;min-height:10rem;background:var(--surface-soft);overflow:hidden}
+.media-failed img{visibility:hidden}
+.media-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;text-align:center;color:var(--muted);font-size:.75rem;font-weight:800;letter-spacing:.04em}
+.booking-feedback{margin:.1rem 0 0;color:var(--rose-deep);font-size:.76rem;font-weight:750}
+.booking-direct-fallback{display:inline-block;margin-top:.15rem;color:var(--rose-deep);font-size:.75rem;font-weight:850;text-underline-offset:.2em}
+.booking-form button:disabled{cursor:not-allowed;opacity:.55;transform:none;box-shadow:none}
+@media(max-width:520px){.booking-direct-fallback{padding:.35rem 0}.media-fallback{min-height:8rem}}
