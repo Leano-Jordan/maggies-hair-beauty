@@ -112,3 +112,11 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Branch audit confirms only `main` remains.
 - Release evidence status: source verified; execution/static regression verified; browser verified NO; physical-device verified NO; client verified NO. Production release remains gated on rendered browser/device testing and Lighthouse/Core Web Vitals once those capabilities are available.
 
+
+
+## Mags V8 Motion/Branch Hardening — 2026-10-08
+- Audited current `main` after the image-provenance refresh and premium-proof work.
+- Found and fixed duplicate premium-motion loading: homepage statically loaded GSAP/ScrollTrigger/Lenis while `main.js` also loaded a second version, and `main.js` contained a second motion implementation alongside `js/motion.js`.
+- Removed the duplicate motion engine from `main.js` and removed the redundant homepage CDN tags. Premium motion is now governed by the existing `enablePremiumMotion` configuration and its dedicated `js/motion.js` progressive-enhancement layer.
+- Synced branch documentation with the verified repository state: `main` is currently the only branch.
+- Remaining evidence gate: live browser/device/Lighthouse verification is still required; this audit is source-verified only.
