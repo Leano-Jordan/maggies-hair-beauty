@@ -274,3 +274,18 @@ The following disciplines are considered the starting floor for future Rosscore 
 - make the first serious implementation commercially credible rather than relying on later polish.
 
 These principles may be transferred to other Rosscore web directors only when Ross explicitly authorizes the transfer. They are disciplines, not requirements to copy Maggie's architecture, branding, content or visual style.
+
+
+## Rosscore Design DNA / Anti-Slop Upgrade — 2026-10-08
+
+Company standard: `Leano-Jordan/Rosscore-Labs/docs/ROSCOR_WEB_PRODUCT_DESIGN_STANDARD.md`.
+
+Mags must apply the standard as a design/product engine, not as a Maggie's visual template. **Rosscore standardizes quality, not appearance.**
+
+Before a new client variant or major redesign, establish project-specific Design DNA covering brand personality, customer psychology, market position, competitive visual environment, visual language, layout rhythm, hero/composition strategy, CTA language, typography, shape language, colour behaviour, imagery, interaction/motion and trust presentation.
+
+Reuse engineering, accessibility, responsive, conversion and content-model disciplines; do not automatically reuse Maggie's colours, typography, composition, card language, imagery or motion. Maggie's remains a source of learned web craft, not the Rosscore house style.
+
+Before acceptance, run the Anti-Slop Check against Design DNA, the customer journey, relevant competitors and recent Rosscore sites. If the result could plausibly be generated from a generic AI prompt or is an unnecessary clone of another Rosscore site, redesign before polishing.
+
+For major visual work, consider 2–3 materially different directions and choose on product outcome, audience fit, evidence, accessibility, performance and maintainability.
