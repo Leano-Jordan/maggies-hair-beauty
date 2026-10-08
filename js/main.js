@@ -229,11 +229,12 @@ const initStickyActions = (business = {}, config = {}) => {
 
   const location = document.createElement('a');
   location.className = 'mobile-action location-link';
-  location.href = isUsableExternalUrl(business?.mapUrl) ? business.mapUrl : getLocationPath();
+  const mapAvailable = Boolean(config.enableMap && isUsableExternalUrl(business?.mapUrl));
+  location.href = mapAvailable ? business.mapUrl : getLocationPath();
   location.setAttribute('aria-label', 'Open salon location');
   location.innerHTML = '<span aria-hidden="true">⌖</span><span>Location</span>';
 
-  if (isUsableExternalUrl(business?.mapUrl)) {
+  if (mapAvailable) {
     location.target = '_blank';
     location.rel = 'noopener noreferrer';
   }
