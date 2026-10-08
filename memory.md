@@ -146,3 +146,20 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Audited the image layer: production pages were still sourcing editorial imagery from Pexels at runtime. Added an automated GitHub Pages-compatible materialization pipeline that downloads the existing approved editorial set into `assets/images/editorial/`, creates responsive WebP sizes, and rewrites page image references to local repo assets.
 - The materialization workflow is currently running; final local-asset verification remains pending until the workflow commits its generated assets.
 - Image composition contract remains: explicit dimensions, responsive `srcset`/sizes, lazy loading below the fold, and deliberate `object-fit:cover`/object-position by composition.
+
+
+## Mags V10 Defect Hunt + Hardening — 2026-10-08
+- Defect-hunt scope: page navigation/CTA paths, booking and service preselection, mobile navigation/sticky actions, gallery filters/lightbox/failure states, malformed/empty form data, responsive edges, keyboard/focus, JavaScript-disabled behavior and shared-component consistency.
+- Fixed booking-path routing so booking CTAs on Contact resolve to #booking, while other pages resolve to contact.html#booking with correct root/subpath handling.
+- Fixed service-specific booking links to preserve ?service= and land directly on #booking.
+- Fixed no-JavaScript booking fallbacks across core pages; static booking CTAs remain actionable while JS enhances them to WhatsApp.
+- Hardened mobile action spacing so body padding exists only when the sticky bar is actually injected; added mobile anchor scroll padding and narrowed-screen brand wrapping.
+- Hardened gallery failure behavior with empty-filter feedback, dynamic media fallback binding and early broken-image detection; accessible lightbox close/focus recovery remains intact.
+- Hardened malformed service data so invalid groups/services no longer abort booking initialization; unavailable services produce a disabled, explicit empty state.
+- Isolated optional social-proof data loading from core business/booking initialization so optional failures cannot break the booking funnel.
+- Normalized shared footer data bindings and identity treatment across core pages; About is now wired to the same business-data contract as the other pages.
+- Respected the enableMap feature flag in the mobile Location action and provide a phone fallback when WhatsApp is unavailable.
+- Hardened mobile navigation touch target sizing.
+- Static regression after the defect pass: all core HTML local links/anchors resolve; main.js parses; all booking/service CTAs have no-JS booking destinations; data-book-service values all exist in the service data source; no empty hash routes remain.
+- Workflow/deployment state: GitHub Pages build succeeded for the current head; CodeQL was running during the final sweep. Browser/device/Lighthouse evidence is not claimed from this environment.
+- Separate refactor pass centralized business-name, booking-message and WhatsApp URL construction to reduce drift without changing the booking contract.
