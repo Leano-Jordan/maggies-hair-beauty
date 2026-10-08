@@ -48,7 +48,8 @@
   .mobile-action{display:flex;align-items:center;justify-content:center;min-height:3.05rem;padding:.5rem;color:var(--ink);font-size:.72rem;font-weight:900;text-decoration:none}
   .mobile-action:first-child{background:var(--berry);color:#fff}
   .mobile-action span:first-child{margin-right:.45rem;color:var(--peach)}
-  body{padding-bottom:5.2rem}
+  html{scroll-padding-bottom:6rem}
+  body.has-mobile-action-bar{padding-bottom:5.2rem}
 }
 @media(max-width:520px){
   .container{width:min(calc(100% - 1.5rem),var(--container))}
