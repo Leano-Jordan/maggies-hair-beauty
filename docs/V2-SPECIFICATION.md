@@ -665,3 +665,66 @@ Maggie's V2 is considered materially complete when:
 This V2 specification is an evolution of the supplied V1 foundation. The V1 source establishes the reusable commercial purpose, lightweight technology choice, progressive enhancement requirement, five-page information architecture, feature baseline, design-system structure, accessibility minimums, performance/SEO goals, security rules, documentation requirements and commercial-readiness tests. fileciteturn0file0L35-L70 fileciteturn0file0L71-L113 fileciteturn0file0L115-L154 fileciteturn0file0L156-L187
 
 V2 adds stronger product-level acceptance criteria, responsive review widths, evidence discipline, booking-flow rules, failure-path requirements and explicit non-goals while preserving the original lightweight foundation.
+
+
+---
+
+# V2 Premium Editorial Upgrade — 2026-10-08
+
+## A. Visual system
+Replace the generic black/white treatment with a neutral premium system:
+- Background: #F9F6F3
+- Primary text: #1A1A1A
+- Secondary text: #8A7F7A
+- Accent/lines/buttons: #D6C7B8
+- Heading family: Fraunces (or approved equivalent serif)
+- Body family: Inter (or approved equivalent grotesk)
+- Deliberate weight contrast between headings, body, metadata and CTAs.
+
+## B. Hero composition
+Use an editorial split: approximately 60% copy / 40% tall 4:5 image; headline + supporting copy; Check availability CTA; secondary gallery/transformations CTA; trust strip beneath the hero copy. Trust figures are proof content and may only be shown after verification.
+
+## C. Signature Rituals
+Primary featured set:
+1. Lived-In Colour Ritual — balayage + gloss + bond — from R1,450
+2. Cloud Curl + Signature Cut — consultation + cut + styling lesson — from R850
+3. Glass Skin Facial — K-Beauty facial — R750
+4. Scalp Reset + Blowout — R650
+
+Do not use low-anchor demo prices such as R350/R450/R320 as the primary featured-price architecture. Where stylist tiers are used, show Junior / Stylist / Master Maggie beneath the relevant ritual. Tier values remain configurable and require client approval.
+
+## D. Imagery
+Final image slots: Hero portrait; Hair lived-in cut; Beauty facial with brown skin/beige towel; Nails with diverse hands and neutral nails on linen. Use beige linen/light wood, no black cape, no pink-wall styling, and a consistent warm-neutral grade. Stock/reference imagery must never be labelled or implied to be verified client transformation work.
+
+## E. Approach
+Sticky left title: Professional care without the cold, clinical feeling. Right stacked cards numbered 01/02/03, with restrained scroll reveal/pin behaviour.
+
+## F. Social proof
+Production proof consists of two real Google reviews with approved name + suburb, a six-slot before/after grid using consistent crop/light, and a product shelf saying We use + offer refills only if the salon actually offers refills. Until supplied, these are content gates, not fabricated proof.
+
+## G. Concierge booking
+Use a WhatsApp deep link with: Hi Maggie's, I'd like [Service] on [Date] at [Time]. Add Usually replies in 12 mins only after verification. Keep the existing backend-free architecture.
+
+## H. Motion contract
+Use GSAP + ScrollTrigger + Lenis as progressive enhancement.
+1. Text mask reveal — clip-path inset to visible, 1.0s, power3.out.
+2. Fade-up stagger — y 24 / autoAlpha 0 to visible, stagger 0.08s, trigger around top 85%.
+3. Image clip reveal — bottom-up clip with restrained scale 1.08.
+4. Parallax — yPercent -30, scrub 1, ease none.
+5. Hover — card y -4px; image scale 1.05 over 0.4s; WhatsApp soft pulse every 4s.
+No bounce, rotation, spin, percentage loaders or excessive motion. Lenis target lerp: 0.08. Reduced-motion users retain native/low-motion behaviour.
+
+## I. Stale-content guard
+Before client handover audit for demo contact details, fake ratings/reviews, demo testimonials, low-anchor placeholder pricing, stock imagery presented as client work, invented before/after transformations, fake response-time claims and unverified product/refill claims. Documentation may describe demo/reference status, but customer-facing pages must not expose stale labels such as Demo content only.
+
+## J. Implementation order
+1. Images and pricing
+2. Visual system
+3. Concierge booking
+4. Lenis
+5. GSAP reveals
+6. Cross-page regression audit
+7. Browser/device verification at 320, 390, 768 and 1440px
+
+## K. Evidence gate
+This upgrade is source-verified. Browser rendering, physical-device behaviour and Lighthouse/Core Web Vitals require an available browser/screenshot test path. Do not mark those gates passed without evidence.
