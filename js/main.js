@@ -415,10 +415,15 @@ Promise.all([
   }
   return Promise.all([businessModule, servicesModule, configModule]);
 })
-  .then(([{ business }, { services }, { siteConfig }]) => {
+  .then(async ([{ business }, { services }, { siteConfig }]) => {
     initStickyActions(business, siteConfig);
     initVerifiedProof(business, siteConfig);
+    initRefillShelf(business, siteConfig);
     initReviewWidget(business);
+    if (siteConfig.enableSocialProof) {
+      const { testimonials } = await import(root + 'data/testimonials.js');
+      initSocialProof(testimonials, siteConfig);
+    }
     return Promise.all([
       initialiseBusiness(business, siteConfig),
       initialiseServices(services, siteConfig)
@@ -457,6 +462,34 @@ const initLuxuryMotionLegacy = () => {
     ticking = true;
     window.requestAnimationFrame(update);
   }, { passive: true });
+};
+
+const initSocialProof = (testimonials, config) => {
+  const section = q('[data-social-proof]');
+  if (!section || !config.enableSocialProof || !Array.isArray(testimonials) || testimonials.length < 2) return;
+  const approved = testimonials.filter((item) => item && item.verified === true && item.source === 'Google' && item.name && item.suburb && item.review);
+  if (approved.length < 2) return;
+  const grid = q('.social-proof-grid', section);
+  if (!grid) return;
+  section.hidden = false;
+  grid.replaceChildren(...approved.slice(0,2).map((item) => {
+    const article = document.createElement('article');
+    article.className = 'social-proof-card';
+    article.innerHTML = '<div class="social-proof-stars" aria-label="5 star Google review">★★★★★</div><blockquote></blockquote><footer></footer>';
+    q('blockquote',article).textContent = item.review;
+    q('footer',article).textContent = item.name + ' · ' + item.suburb;
+    return article;
+  }));
+};
+
+const initRefillShelf = (business, config) => {
+  const section = q('[data-refill-shelf]');
+  if (!section || !config.enableRefillShelf) return;
+  const message = String(business?.refillOffer || '').trim();
+  if (!message) return;
+  const copy = q('.refill-copy', section);
+  if (copy) copy.textContent = message;
+  section.hidden = false;
 };
 
 const initReviewWidget = (business) => {
