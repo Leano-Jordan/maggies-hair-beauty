@@ -9,9 +9,15 @@ const root = document.body?.dataset.root || '';
 const setContactField = (id, value, type) => {
   const element = q('#' + id);
   if (!element) return;
-  element.textContent = value;
-  if (type === 'phone') element.href = 'tel:' + value.replace(/\s/g, '');
-  if (type === 'email') element.href = 'mailto:' + value;
+  const text = String(value || '').trim();
+  if (!text) {
+    element.hidden = true;
+    return;
+  }
+  element.hidden = false;
+  element.textContent = text;
+  if (type === 'phone') element.href = 'tel:' + text.replace(/\s/g, '');
+  if (type === 'email') element.href = 'mailto:' + text;
 };
 
 const setLocalDateMinimum = (input) => {
@@ -239,30 +245,29 @@ const initQuickBooking = (business, config) => {
   const form = q('#quick-book-form');
   if (!form || !config.enableBooking || !config.enableWhatsApp) return;
 
-  const date = q('#quick-date', form);
-  setLocalDateMinimum(date);
+  const refresh = q('#quick-refresh', form);
+  const availability = q('#quick-availability', form);
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const service = String(q('#quick-service', form)?.value || '').trim();
-    const preferredDate = String(date?.value || '').trim();
-    const preferredTime = String(q('#quick-time', form)?.value || '').trim();
-    if (!service) {
-      q('#quick-service', form)?.focus();
+    const refreshGoal = String(refresh?.value || '').trim();
+    const whenFree = String(availability?.value || '').trim();
+
+    if (!refreshGoal) {
+      refresh?.focus();
+      return;
+    }
+    if (!whenFree) {
+      availability?.focus();
       return;
     }
 
-    const displayDate = preferredDate
-      ? new Intl.DateTimeFormat('en-ZA', { weekday:'short', day:'numeric', month:'short' }).format(new Date(preferredDate + 'T12:00:00'))
-      : 'Not specified';
-
     const message = [
       'Hi ' + business.name + ',',
-      "I'd like to book.",
+      "I'd like to check availability for an appointment.",
       '',
-      'Service: ' + service,
-      'Preferred date: ' + displayDate,
-      'Preferred time: ' + (preferredTime || 'Flexible')
+      "What I'd like to refresh: " + refreshGoal,
+      "When I'm free: " + whenFree
     ].join('\n');
 
     const number = business.whatsapp.replace(/\D/g, '');
