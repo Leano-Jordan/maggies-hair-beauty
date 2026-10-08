@@ -421,8 +421,12 @@ Promise.all([
     initRefillShelf(business, siteConfig);
     initReviewWidget(business);
     if (siteConfig.enableSocialProof) {
-      const { testimonials } = await import(root + 'data/testimonials.js');
+      const [{ testimonials }, { portfolio }] = await Promise.all([
+        import(root + 'data/testimonials.js'),
+        import(root + 'data/portfolio.js')
+      ]);
       initSocialProof(testimonials, siteConfig);
+      initPortfolio(portfolio, siteConfig);
     }
     return Promise.all([
       initialiseBusiness(business, siteConfig),
@@ -462,6 +466,30 @@ const initLuxuryMotionLegacy = () => {
     ticking = true;
     window.requestAnimationFrame(update);
   }, { passive: true });
+};
+
+const initPortfolio = (portfolio, config) => {
+  const section = q('[data-transformations]');
+  if (!section || !config.enableGallery || !Array.isArray(portfolio?.transformations)) return;
+  const approved = portfolio.transformations.filter((item) => item && item.approved === true && item.before && item.after && item.title);
+  if (approved.length < 6) return;
+  const grid = q('.transformations-grid', section);
+  if (!grid) return;
+  section.hidden = false;
+  grid.replaceChildren(...approved.slice(0,6).map((item) => {
+    const figure = document.createElement('figure');
+    figure.className = 'transformation-card';
+    figure.innerHTML = '<div class="transformation-pair"><img class="before" alt=""><img class="after" alt=""></div><figcaption><strong></strong><span></span></figcaption>';
+    const before = q('.before',figure);
+    const after = q('.after',figure);
+    before.src = item.before;
+    after.src = item.after;
+    before.alt = item.title + ' before';
+    after.alt = item.title + ' after';
+    q('strong',figure).textContent = item.title;
+    q('span',figure).textContent = item.category || 'Transformation';
+    return figure;
+  }));
 };
 
 const initSocialProof = (testimonials, config) => {
