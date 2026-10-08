@@ -2,6 +2,22 @@
  * GSAP/ScrollTrigger + Lenis are progressive enhancements only.
  * Core navigation, content and booking remain functional without them.
  */
+const loadScript = (src, globalName) => new Promise((resolve, reject) => {
+  if (window[globalName]) { resolve(); return; }
+  const existing = document.querySelector('script[data-mags-motion="' + globalName + '"]');
+  if (existing) {
+    existing.addEventListener('load', resolve, { once:true });
+    existing.addEventListener('error', reject, { once:true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = src;
+  script.defer = true;
+  script.dataset.magsMotion = globalName;
+  script.onload = resolve;
+  script.onerror = reject;
+  document.head.appendChild(script);
+});
 const initPremiumMotion = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
 
@@ -99,10 +115,16 @@ const initPremiumMotion = () => {
   return true;
 };
 
-const waitForMotionEngines = (attempt = 0) => {
-  if (initPremiumMotion()) return;
-  if (attempt >= 10) return;
-  window.setTimeout(() => waitForMotionEngines(attempt + 1), 300);
+const start = async () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js','gsap');
+    await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js','ScrollTrigger');
+    await loadScript('https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js','Lenis');
+    initPremiumMotion();
+  } catch (_) {
+    // Motion is optional. Native scrolling and all core site functions remain intact.
+  }
 };
 
-waitForMotionEngines();
+start();
