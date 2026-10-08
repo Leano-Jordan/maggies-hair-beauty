@@ -183,3 +183,14 @@ Evidence-based source inspection only.
 - Preserved centralized service data compatibility: visible service names/prices/durations remain synchronized with data/services.js.
 - Acceptance principle reinforced: a Mags visual pass is not complete merely because source code changed; the resulting page must produce a perceptible UI improvement across desktop and mobile.
 - Deployment diagnosis: main contains the current implementation. The actual GitHub Pages settings/deployment target could not be read through the available GitHub connector, so the live deployment source remains externally unverified. The repository does contain a second branch (commercial-visual-round-7), making Pages branch configuration a specific item to check if the live site continues serving the pre-16 version.
+## Improvement Round 17 — 2026-10-08
+- Fixed the same root-cause defect on About: pages/about.html had been missing the shared css/layout.css dependency, so core page/header/media layout rules were not loading consistently.
+- Rebuilt About as a responsive editorial page rather than preserving the weaker legacy composition.
+- Added a strong visual hero using lightweight CSS art instead of introducing another external image dependency.
+- Added a three-column story panel on desktop with deliberate single-column mobile reflow.
+- Added clearer principle cards, a value band and an explicit Services/Booking next-step section.
+- Preserved the prior decision to avoid About photography dependency while still giving the page a strong visual identity.
+- Confirmed through source inspection that all five pages now load the shared layout stylesheet.
+- Mags operating contract updated with Ross's explicit acceptance rule: visual work must produce a perceptible improvement on live desktop and mobile, and structural redesign is preferred over small corrective overrides when the existing composition is weak.
+- Current web-practice baseline incorporated from current W3C/MDN guidance: responsive images, explicit dimensions, appropriate lazy loading, deliberate object positioning, visible focus, non-obscured focus, and practical touch-target sizing.
+- Live browser/device verification remains a separate evidence level and is not claimed unless directly performed.
