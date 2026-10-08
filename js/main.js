@@ -138,7 +138,26 @@ const initMediaFallbacks = (scope = document) => {
 
 const initGalleryFilters = () => {
   const filters = qa('.filter');
-  if (!filters.length) return;
+  const gallery = q('.gallery-full');
+  if (!filters.length || !gallery) return;
+
+  const emptyState = document.createElement('p');
+  emptyState.className = 'gallery-filter-empty';
+  emptyState.setAttribute('role', 'status');
+  emptyState.setAttribute('aria-live', 'polite');
+  emptyState.hidden = true;
+  emptyState.textContent = 'No work is available in this category yet.';
+  gallery.after(emptyState);
+
+  const updateGallery = (filter) => {
+    let visibleCount = 0;
+    qa('[data-category]', gallery).forEach((item) => {
+      const visible = filter === 'all' || item.dataset.category === filter;
+      item.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+    emptyState.hidden = visibleCount !== 0;
+  };
 
   filters.forEach((button) => button.addEventListener('click', () => {
     filters.forEach((item) => {
@@ -146,11 +165,10 @@ const initGalleryFilters = () => {
       item.classList.toggle('active', selected);
       item.setAttribute('aria-pressed', String(selected));
     });
-
-    qa('[data-category]').forEach((item) => {
-      item.hidden = button.dataset.filter !== 'all' && item.dataset.category !== button.dataset.filter;
-    });
+    updateGallery(button.dataset.filter || 'all');
   }));
+
+  updateGallery(filters.find((button) => button.classList.contains('active'))?.dataset.filter || 'all');
 };
 
 const initGalleryLightbox = () => {
