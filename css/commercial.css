@@ -1,44 +1,14 @@
-/* Commercial visual refinement: stable, restrained and regression-safe. */
+/* Stable production contracts shared by all pages. Visual styling lives in the core CSS files. */
 .header-inner{position:relative}
-html.js .nav-toggle{position:relative;z-index:32;border:1px solid var(--line);border-radius:.8rem;background:rgba(255,255,255,.8);cursor:pointer;color:var(--ink)}
+html.js .nav-toggle{z-index:32;border:1px solid var(--line);color:var(--ink)}
 html.js .primary-nav{z-index:31}
+.image-frame,.page-hero-media,.contact-photo{position:relative}
+.image-frame img,.page-hero-media img,.contact-photo img{display:block;width:100%;height:100%}
+.media-failed{background:var(--surface-soft)}
+.media-failed img{visibility:hidden}
 @media(max-width:800px){
-  html.js .primary-nav{top:calc(100% + 1px);max-height:calc(100vh - 5.5rem);overflow-y:auto;overscroll-behavior:contain;pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-.35rem);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
-  html.js .primary-nav.open{pointer-events:auto;opacity:1;visibility:visible;transform:none}
-  body.nav-open{overflow:hidden}
+  html.js .primary-nav{max-height:calc(100vh - 5rem);overflow-y:auto;overscroll-behavior:contain}
 }
-
-/* Predictable media contract. */
-.image-frame{position:relative;aspect-ratio:4/5;min-height:0}
-.image-frame img{display:block;width:100%;height:100%;min-height:0!important;object-fit:cover;object-position:center}
-.image-frame-tall{aspect-ratio:4/5}
-.page-hero-media,.page-hero-media.portrait{aspect-ratio:4/5;min-height:0}
-.page-hero-media img,.page-hero-media.portrait img{display:block;width:100%;height:100%;min-height:0!important;object-fit:cover}
-.contact-photo{aspect-ratio:16/9}
-.contact-photo img{width:100%;height:100%;min-height:0;object-fit:cover}
-.image-card img{height:100%;min-height:0}
-.gallery-tile{min-height:0}
-.gallery-tile img{width:100%;height:100%;object-fit:cover}
-
-/* About page: typography-led composition, no image dependency. */
-.about-story{align-items:start}
-.about-story-copy{padding-top:0;max-width:72ch;margin-inline:auto}
-.about-story-copy h2{font-size:clamp(2.15rem,4vw,3.5rem);line-height:1.02}
-.about-story-copy>p{font-size:1.02rem;line-height:1.8;color:var(--ink-soft)}
-.story-points article{min-height:100%}
-.about-hero .page-hero-grid{grid-template-columns:1fr}
-.about-hero-copy{max-width:70ch}
-.about-hero-media{display:none!important}
-
-@media(max-width:800px){
-  .page-hero-media,.page-hero-media.portrait{aspect-ratio:4/3;min-height:0}
-}
-@media(max-width:520px){
-  .image-frame,.image-frame-tall{aspect-ratio:4/5}
-  .page-hero-media,.page-hero-media.portrait{aspect-ratio:4/3}
-  .contact-photo{aspect-ratio:16/10}
-}
-
 @media(prefers-reduced-motion:reduce){
   html.js .primary-nav{transition:none}
 }
