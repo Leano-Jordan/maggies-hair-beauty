@@ -99,3 +99,16 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Source-level regression checks: all five core pages indexable, canonicalized and OG-enabled; no malformed closing tags; all Pexels image elements in core pages have responsive sources; stale demo phone/address/email strings removed.
 - Live browser inspection through this environment was not independently available; user reports the GitHub Pages deployment is updating normally. Production visual/device verification remains a separate evidence gate.
 - Do not publish unverified review counts, certifications, exact opening hours, Google Business Profile claims or client before/after imagery until supplied/connected.
+
+## Mags V7 Browser/Mobile/Defect/SEO/Performance Audit — 2026-10-08
+- Attempted live browser inspection for the deployed GitHub Pages site, but connected Firecrawl browser/scrape access was unavailable because the account had insufficient credits; direct live-page retrieval was also unavailable in this execution. Browser/device evidence is therefore not claimed.
+- Source audit of main found and fixed a high-severity booking-path defect: root-level homepage booking and mobile-action links could resolve to `contact.html` instead of `pages/contact.html`. A shared `getBookingPath()` contract now preserves correct root and subpage routing.
+- Fixed WhatsApp data divergence between `data/business.js`, `data/social.js` and the Contact no-JavaScript fallback.
+- Fixed service-price drift in `pages/services.html` so Brow Shape & Tint, Gel Manicure and Luxury Pedicure match `data/services.js`, the authoritative service source.
+- Hardened gallery controls with explicit button types and added async image decoding for lazy gallery images.
+- SEO hardening confirmed unique title/description/canonical/OG/Twitter metadata across all five core pages; added OG/Twitter image metadata using each page's existing hero image; robots.txt and sitemap.xml are indexable and contain all five core URLs.
+- Performance source audit confirmed responsive image sources, lazy loading of secondary media, prioritized hero images, Pexels preconnect and tighter homepage gallery `sizes` hints. Shared CSS is about 38.7 KB and shared JS about 14.7 KB before transfer compression/caching; Lighthouse/Core Web Vitals were not available.
+- Final source regression found no critical/high defects, all five core pages have one H1, complete basic SEO metadata, image alt coverage, valid button types, safe external-link rel attributes and resolvable internal HTML links.
+- Branch audit confirms only `main` remains.
+- Release evidence status: source verified; execution/static regression verified; browser verified NO; physical-device verified NO; client verified NO. Production release remains gated on rendered browser/device testing and Lighthouse/Core Web Vitals once those capabilities are available.
+
