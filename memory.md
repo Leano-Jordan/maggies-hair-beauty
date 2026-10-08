@@ -63,3 +63,10 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Source-level regression checks confirmed: only `main` exists, homepage has no `<video>`, hero image class is present, booking funnel and service preselection code are present, and core page style contracts remain available.
 - Browser/live/device verification remains unavailable in this execution because live Firecrawl access was blocked by insufficient credits. This round is source-verified, not browser-verified or production-release verified.
 - Next evidence gate: render and interact at 320px, 390px, 768px and 1440px; test mobile navigation, booking flow, service preselection, gallery filters/lightbox, keyboard focus and image failure behaviour.
+
+## Mags V4 Visual Quality Sweep — 2026-10-08
+- Attempted live visual inspection of the deployed GitHub Pages site using a screenshot-capable browser fetch at 390x844.
+- Live visual capture was blocked by the connected Firecrawl account's insufficient credits; therefore no claim of pixel-level browser verification is made.
+- Performed a source-level visual hardening pass instead, focused on hero image layering, overlay z-index, image positioning and content-card stacking.
+- Confirmed the redesigned homepage has no remote video hero, uses a dedicated hero image contract, and retains the mobile navigation/action-bar system.
+- The next visual gate remains real rendered screenshots at 320x844, 390x844, 768x1024 and 1440px widths once browser/screenshot access is available.
