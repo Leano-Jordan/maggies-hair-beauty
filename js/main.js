@@ -113,20 +113,23 @@ const initVerifiedProof = (business, config) => {
   });
 };
 
+const markMediaFailed = (image) => {
+  const frame = image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media, .about-hero-art, .transformation-card, .transformation-pair');
+  frame?.classList.add('media-failed');
+  if (frame && !frame.querySelector('.media-fallback')) {
+    const fallback = document.createElement('span');
+    fallback.className = 'media-fallback';
+    fallback.setAttribute('role', 'status');
+    fallback.textContent = 'Image unavailable';
+    frame.append(fallback);
+  }
+};
+
 const bindMediaFallback = (image) => {
   if (!image || image.dataset.mediaFallbackBound === 'true') return;
   image.dataset.mediaFallbackBound = 'true';
-  image.addEventListener('error', () => {
-    const frame = image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media, .about-hero-art, .transformation-card, .transformation-pair');
-    frame?.classList.add('media-failed');
-    if (frame && !frame.querySelector('.media-fallback')) {
-      const fallback = document.createElement('span');
-      fallback.className = 'media-fallback';
-      fallback.setAttribute('role', 'status');
-      fallback.textContent = 'Image unavailable';
-      frame.append(fallback);
-    }
-  }, { once:true });
+  image.addEventListener('error', () => markMediaFailed(image), { once:true });
+  if (image.complete && image.naturalWidth === 0) markMediaFailed(image);
 };
 
 const initMediaFallbacks = (scope = document) => {
@@ -462,10 +465,10 @@ const populateServiceSelect = (select, services) => {
 };
 
 const initialiseServices = async (services, config = {}) => {
-  if (!Array.isArray(services)) return;
+  const serviceSource = Array.isArray(services) ? services : [];
 
   [q('#service'), q('#quick-service')].forEach((select) => {
-    if (select) populateServiceSelect(select, services);
+    if (select) populateServiceSelect(select, serviceSource);
   });
 
   const requestedService = new URLSearchParams(window.location.search).get('service');
@@ -516,20 +519,28 @@ Promise.all([
     initVerifiedProof(business, siteConfig);
     initRefillShelf(business, siteConfig);
     initReviewWidget(business);
-    if (siteConfig.enableSocialProof) {
-      const [{ testimonials }, { portfolio }] = await Promise.all([
-        import(root + 'data/testimonials.js'),
-        import(root + 'data/portfolio.js')
-      ]);
-      initSocialProof(testimonials, siteConfig);
-      initPortfolio(portfolio, siteConfig);
-    }
-    return Promise.all([
+
+    const coreInitialisation = Promise.all([
       initialiseBusiness(business, siteConfig),
       initialiseServices(services, siteConfig)
     ]);
+
+    const optionalProof = siteConfig.enableSocialProof
+      ? Promise.all([
+          import(root + 'data/testimonials.js'),
+          import(root + 'data/portfolio.js')
+        ])
+          .then(([{ testimonials }, { portfolio }]) => {
+            initSocialProof(testimonials, siteConfig);
+            initPortfolio(portfolio, siteConfig);
+          })
+          .catch((error) => console.warn('Optional social-proof data unavailable:', error))
+      : Promise.resolve();
+
+    await coreInitialisation;
+    await optionalProof;
   })
-  .catch((error) => console.warn('Optional site enhancements unavailable:', error));
+  .catch((error) => console.warn('Core site enhancements unavailable:', error));
 
 const initComparisonSliders = () => {
   qa('[data-comparison]').forEach((card) => {
