@@ -70,3 +70,15 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Performed a source-level visual hardening pass instead, focused on hero image layering, overlay z-index, image positioning and content-card stacking.
 - Confirmed the redesigned homepage has no remote video hero, uses a dedicated hero image contract, and retains the mobile navigation/action-bar system.
 - The next visual gate remains real rendered screenshots at 320x844, 390x844, 768x1024 and 1440px widths once browser/screenshot access is available.
+
+
+## Mags V5 Performance & SEO Hardening — 2026-10-08
+- Audited the current main branch against the V1 foundation and active V2/Mags rules.
+- Added page-level canonical URLs and Open Graph/Twitter metadata for Home, Services, Gallery, About and Contact.
+- Preserved `noindex,nofollow` deliberately because the repository still contains fictional/demo business information; this is an SEO safety gate, not an SEO defect.
+- Added root `robots.txt` with an explicit crawl block for the demo deployment. A production release must replace this with an indexable robots policy and verified sitemap.
+- Added responsive `srcset` and `sizes` attributes to Pexels-hosted imagery across core pages, while retaining explicit dimensions, lazy loading for secondary media and high priority for hero media.
+- Added Pexels preconnect on all core pages to reduce connection setup cost for critical imagery.
+- Source verification passed for canonical metadata, social metadata, demo index gate, responsive image attributes and image-origin preconnect across all five core pages.
+- Browser/Lighthouse/device verification remains outstanding; this pass is source-verified only.
+- Production SEO gate remains: replace demo business/contact/pricing/content, enable indexing, add verified LocalBusiness/BeautySalon structured data, publish sitemap.xml, then run rendered Lighthouse/Core Web Vitals and search-indexing checks.
