@@ -6,6 +6,11 @@ const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)]
 const MOBILE_BREAKPOINT = 800;
 const root = document.body?.dataset.root || '';
 const getBookingPath = () => root ? root + 'contact.html' : 'pages/contact.html';
+const getWhatsAppNumber = (business) => String(business?.whatsapp || '').replace(/\D/g, '');
+const isUsableExternalUrl = (value) => {
+  try { return ['http:', 'https:'].includes(new URL(String(value || '')).protocol); }
+  catch { return false; }
+};
 
 const setContactField = (id, value, type) => {
   const element = q('#' + id);
@@ -178,7 +183,7 @@ const initGalleryLightbox = () => {
   });
 };
 
-const initStickyActions = (business, config) => {
+const initStickyActions = (business = {}, config = {}) => {
   if (!document.body || !config.enableBooking || q('.mobile-action-bar')) return;
 
   const bar = document.createElement('div');
@@ -191,11 +196,11 @@ const initStickyActions = (business, config) => {
 
   const location = document.createElement('a');
   location.className = 'mobile-action location-link';
-  location.href = business.mapUrl || (getBookingPath() + '#visit');
+  location.href = isUsableExternalUrl(business?.mapUrl) ? business.mapUrl : (getBookingPath() + '#visit');
   location.setAttribute('aria-label', 'Open salon location');
   location.innerHTML = '<span aria-hidden="true">⌖</span><span>Location</span>';
 
-  if (business.mapUrl) {
+  if (isUsableExternalUrl(business?.mapUrl)) {
     location.target = '_blank';
     location.rel = 'noopener noreferrer';
   }
@@ -230,7 +235,7 @@ const initServiceBookLinks = () => {
   });
 };
 
-const initBookingForm = (business, config) => {
+const initBookingForm = (business = {}, config = {}) => {
   const form = q('#booking-form');
   if (!form || !config.enableBooking) return;
 
@@ -240,7 +245,8 @@ const initBookingForm = (business, config) => {
   const note = q('#note', form);
   setLocalDateMinimum(date);
   const feedback = q('#booking-feedback', form);
-  if (!business.whatsapp || !String(business.whatsapp).replace(/\D/g, '')) {
+  const whatsappNumber = getWhatsAppNumber(business);
+  if (!whatsappNumber) {
     const submit = q('button[type="submit"]', form);
     if (submit) submit.disabled = true;
     if (feedback) { feedback.hidden = false; feedback.textContent = 'WhatsApp booking is not configured yet. Please use the phone or map contact options.'; }
@@ -274,7 +280,7 @@ const initBookingForm = (business, config) => {
       notes ? "Notes: " + notes : ""
     ].filter(Boolean).join('\n');
 
-    const number = business.whatsapp.replace(/\D/g, '');
+    const number = getWhatsAppNumber(business);
     if (config.enableWhatsApp && number) {
       window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
     } else {
@@ -287,7 +293,7 @@ const initBookingForm = (business, config) => {
   });
 };
 
-const initQuickBooking = (business, config) => {
+const initQuickBooking = (business = {}, config = {}) => {
   const form = q('#quick-book-form');
   if (!form || !config.enableBooking || !config.enableWhatsApp) return;
 
@@ -312,7 +318,7 @@ const initQuickBooking = (business, config) => {
       "Hi Maggie's, I'd like " + refreshGoal + " on " + whenFree + "."
     ].join('\n');
 
-    const number = business.whatsapp.replace(/\D/g, '');
+    const number = getWhatsAppNumber(business);
     if (number) {
       window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
     } else {
@@ -325,8 +331,8 @@ const initQuickBooking = (business, config) => {
   });
 };
 
-const initialiseBusiness = async (business, config) => {
-  const number = business.whatsapp.replace(/\D/g, '');
+const initialiseBusiness = async (business = {}, config = {}) => {
+  const number = getWhatsAppNumber(business);
   const bookingMessage = business.bookingMessage || ("Hi " + business.name + ", I'd like to book an appointment.");
 
   if (config.enableBooking) {
@@ -369,11 +375,14 @@ const initialiseBusiness = async (business, config) => {
   }
 
   const mapLink = q('#contact-map-link');
-  if (mapLink && config.enableMap && business.mapUrl) {
-    mapLink.href = business.mapUrl;
-    mapLink.target = '_blank';
-    mapLink.rel = 'noopener noreferrer';
-    mapLink.hidden = false;
+  if (mapLink) {
+    const mapAvailable = Boolean(config.enableMap && isUsableExternalUrl(business?.mapUrl));
+    mapLink.hidden = !mapAvailable;
+    if (mapAvailable) {
+      mapLink.href = business.mapUrl;
+      mapLink.target = '_blank';
+      mapLink.rel = 'noopener noreferrer';
+    }
   }
 
   if (!config.enableBooking) return;
@@ -395,7 +404,7 @@ const populateServiceSelect = (select, services) => {
   select.replaceChildren(...options);
 };
 
-const initialiseServices = async (services, config) => {
+const initialiseServices = async (services, config = {}) => {
   if (!Array.isArray(services)) return;
 
   [q('#service'), q('#quick-service')].forEach((select) => {
