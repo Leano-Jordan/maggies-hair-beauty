@@ -48,3 +48,18 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Verified source-level JavaScript syntax using parser compilation and verified key UX contracts/counts.
 - Browser/device rendering remains unverified in this execution; physical-device testing is still required before production release.
 - Intentionally not implemented with fake data: Google review feed, real team profiles and genuine before/after client transformations require verified client-approved sources/assets.
+
+## Mags V3 Editorial UI Audit — 2026-10-08
+- Audited the main branch after the V2 / luxury UI iterations and found accumulated visual overrides, excessive card/pill treatment, placeholder-heavy sections and inconsistent conversion flow.
+- Replaced layered visual overrides with one warm-neutral editorial system across variables, base, layout, components, pages, responsive and accessibility styles.
+- Simplified the homepage into a clear conversion story: hero → service categories → featured canonical services → approach → gallery → visit/booking → final CTA.
+- Removed homepage placeholder review UI, stock before/after transformation sliders, specialist placeholders and invented package concepts that weakened credibility and made the page feel like a template.
+- Removed the homepage remote MP4 hero dependency and switched to a high-priority still image for a lighter, more predictable above-the-fold experience.
+- Fixed booking CTA behaviour so standard `.booking-link` elements open the contact booking funnel; direct WhatsApp remains explicitly opt-in through `data-direct-whatsapp="true"`.
+- Fixed service-specific booking links to preserve their original contact-page destination while adding `?service=` for canonical service preselection.
+- Aligned featured Services cards with `data/services.js` so displayed booking services and booking options cannot silently diverge.
+- Made the About hero photography-led and prioritized its hero media; Gallery hero media was also prioritized.
+- Tightened controls, borders, spacing, typography, mobile navigation, focus treatment and reduced-motion styling to match the new visual direction.
+- Source-level regression checks confirmed: only `main` exists, homepage has no `<video>`, hero image class is present, booking funnel and service preselection code are present, and core page style contracts remain available.
+- Browser/live/device verification remains unavailable in this execution because live Firecrawl access was blocked by insufficient credits. This round is source-verified, not browser-verified or production-release verified.
+- Next evidence gate: render and interact at 320px, 390px, 768px and 1440px; test mobile navigation, booking flow, service preselection, gallery filters/lightbox, keyboard focus and image failure behaviour.
