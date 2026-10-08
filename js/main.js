@@ -251,14 +251,9 @@ const initBookingForm = (business, config) => {
       : 'Not specified';
 
     const message = [
-      'Hi ' + business.name + ',',
-      "I'd like to book an appointment.",
-      '',
-      'Service: ' + serviceName,
-      'Preferred date: ' + displayDate,
-      'Preferred time: ' + (preferredTime || 'Flexible'),
-      'Notes: ' + (notes || 'None')
-    ].join('\n');
+      "Hi Maggie's, I'd like " + serviceName + " on " + displayDate + " at " + (preferredTime || 'a flexible time') + ".",
+      notes ? "Notes: " + notes : ""
+    ].filter(Boolean).join('\n');
 
     const number = business.whatsapp.replace(/\D/g, '');
     if (config.enableWhatsApp && number) {
