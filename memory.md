@@ -61,7 +61,7 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Made the About hero photography-led and prioritized its hero media; Gallery hero media was also prioritized.
 - Tightened controls, borders, spacing, typography, mobile navigation, focus treatment and reduced-motion styling to match the new visual direction.
 - Source-level regression checks confirmed: only `main` exists, homepage has no `<video>`, hero image class is present, booking funnel and service preselection code are present, and core page style contracts remain available.
-- Browser/live/device verification remains unavailable in this execution because live Firecrawl access was blocked by insufficient credits. This round is source-verified, not browser-verified or production-release verified.
+- Browser/live/device verification was unavailable in this execution. This round is source-verified, not browser-verified or production-release verified.
 - Next evidence gate: render and interact at 320px, 390px, 768px and 1440px; test mobile navigation, booking flow, service preselection, gallery filters/lightbox, keyboard focus and image failure behaviour.
 
 ## Mags V4 Visual Quality Sweep — 2026-10-08
