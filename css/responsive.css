@@ -33,7 +33,7 @@
   .page-hero-grid{grid-template-columns:1fr;gap:2rem}
   .page-hero h1{font-size:clamp(3.2rem,13vw,5rem);max-width:none}
   .page-hero-media,.page-hero-media.portrait{aspect-ratio:4/3}
-  .card-grid,.lookbook-grid,.luxury-service-grid,.step-grid{grid-template-columns:1fr}.premium-ritual-grid{grid-template-columns:1fr}.approach-grid{grid-template-columns:1fr;gap:2rem}.approach-sticky{position:relative;top:auto}.approach-card{position:relative;top:auto!important;min-height:auto}
+  .card-grid,.lookbook-grid,.luxury-service-grid,.step-grid,.social-proof-grid,.transformations-grid,.refill-shelf-grid{grid-template-columns:1fr}.premium-ritual-grid{grid-template-columns:1fr}.approach-grid{grid-template-columns:1fr;gap:2rem}.approach-sticky{position:relative;top:auto}.approach-card{position:relative;top:auto!important;min-height:auto}
   .split-grid{grid-template-columns:1fr;gap:2.5rem}
   .split-heading,.cta-block{align-items:flex-start;flex-direction:column}
   .cta-block{display:flex}
