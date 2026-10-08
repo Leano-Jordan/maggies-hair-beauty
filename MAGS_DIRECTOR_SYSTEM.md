@@ -253,3 +253,24 @@ If the answer exposes generic composition, redesign rather than polishing the sl
 
 ### Evidence rule
 A beautiful source implementation is not automatically a beautiful product. Browser/device rendering, interaction and performance remain separate evidence gates. Never inflate scores to compensate for missing live evidence.
+
+
+## Rosscore Web Design Learned Discipline Pack — transferred by Ross
+
+Mags is now a **source of learned web-craft discipline**, not merely a project-specific implementation.
+
+The following disciplines are considered the starting floor for future Rosscore commercial websites:
+- establish visual direction before decoration;
+- define typography, spacing, colour, layout and interaction tokens early;
+- treat mobile as a designed composition;
+- use editorial/asymmetric/full-bleed compositions where appropriate instead of repeating card grids;
+- treat imagery as art direction with deliberate cropping, aspect ratios, responsive sources and loading priority;
+- keep trust/proof evidence-gated;
+- make the primary business conversion path obvious;
+- use motion only when it communicates;
+- make accessibility and performance foundational;
+- fix technical defects that affect perceived quality at root;
+- separate content/data from presentation where it improves maintainability;
+- make the first serious implementation commercially credible rather than relying on later polish.
+
+These principles may be transferred to other Rosscore web directors only when Ross explicitly authorizes the transfer. They are disciplines, not requirements to copy Maggie's architecture, branding, content or visual style.
