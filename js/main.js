@@ -7,11 +7,19 @@ const MOBILE_BREAKPOINT = 800;
 const root = document.body?.dataset.root || '';
 
 const setContactField = (id, value, type) => {
-  const element = q(`#${id}`);
+  const element = q('#' + id);
   if (!element) return;
   element.textContent = value;
-  if (type === 'phone') element.href = `tel:${value.replace(/\s/g, '')}`;
-  if (type === 'email') element.href = `mailto:${value}`;
+  if (type === 'phone') element.href = 'tel:' + value.replace(/\s/g, '');
+  if (type === 'email') element.href = 'mailto:' + value;
+};
+
+const setLocalDateMinimum = (input) => {
+  if (!input) return;
+  const today = new Date();
+  const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+    .toISOString().slice(0, 10);
+  input.min = localDate;
 };
 
 const initNavigation = () => {
@@ -31,7 +39,6 @@ const initNavigation = () => {
   };
 
   const closeNav = () => setNavState(false);
-
   setNavState(false);
 
   toggle.addEventListener('click', () => {
@@ -53,7 +60,7 @@ const initNavigation = () => {
     }
   });
 
-  window.addEventListener('resize', () => setNavState(false), { passive: true });
+  window.addEventListener('resize', closeNav, { passive:true });
 };
 
 const initYear = () => {
@@ -64,9 +71,9 @@ const initYear = () => {
 const initMediaFallbacks = () => {
   qa('img').forEach((image) => {
     image.addEventListener('error', () => {
-      image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card')
+      image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media')
         ?.classList.add('media-failed');
-    }, { once: true });
+    }, { once:true });
   });
 };
 
@@ -76,8 +83,9 @@ const initGalleryFilters = () => {
 
   filters.forEach((button) => button.addEventListener('click', () => {
     filters.forEach((item) => {
-      item.classList.toggle('active', item === button);
-      item.setAttribute('aria-pressed', String(item === button));
+      const selected = item === button;
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-pressed', String(selected));
     });
 
     qa('[data-category]').forEach((item) => {
@@ -125,13 +133,123 @@ const initGalleryLightbox = () => {
   });
 };
 
+const initStickyActions = (business, config) => {
+  if (!document.body || !config.enableBooking) return;
+  if (q('.mobile-action-bar')) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'mobile-action-bar';
+  bar.innerHTML =
+    '<a class="mobile-action booking-link" href="' + root + 'contact.html"><span aria-hidden="true">WA</span><span>Fast booking</span></a>' +
+    '<a class="mobile-action location-link" href="' + (business.mapUrl || (root + 'contact.html#visit')) + '" aria-label="Open salon location"><span aria-hidden="true">⌖</span><span>Location</span></a>';
+
+  document.body.append(bar);
+  if (business.mapUrl) {
+    const location = q('.mobile-action.location-link', bar);
+    location.target = '_blank';
+    location.rel = 'noopener noreferrer';
+  }
+};
+
+const initServiceBookLinks = () => {
+  qa('[data-book-service]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const service = String(link.dataset.bookService || '').trim();
+      if (!service) return;
+      event.preventDefault();
+      const separator = link.href.includes('?') ? '&' : '?';
+      window.location.href = link.href + separator + 'service=' + encodeURIComponent(service);
+    });
+  });
+};
+
+const initBookingForm = (business, config) => {
+  const form = q('#booking-form');
+  if (!form || !config.enableBooking) return;
+
+  const service = q('#service', form);
+  const date = q('#date', form);
+  const timeWindow = q('#time-window', form);
+  const note = q('#note', form);
+  setLocalDateMinimum(date);
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const serviceName = String(service?.value || '').trim();
+    const preferredDate = String(date?.value || '').trim();
+    const preferredTime = String(timeWindow?.value || '').trim();
+    const notes = String(note?.value || '').trim();
+
+    if (!serviceName) {
+      service?.focus();
+      return;
+    }
+
+    const displayDate = preferredDate
+      ? new Intl.DateTimeFormat('en-ZA', { weekday:'long', day:'numeric', month:'long' }).format(new Date(preferredDate + 'T12:00:00'))
+      : 'Not specified';
+
+    const message = [
+      'Hi ' + business.name + ',',
+      "I'd like to book an appointment.",
+      '',
+      'Service: ' + serviceName,
+      'Preferred date: ' + displayDate,
+      'Preferred time: ' + (preferredTime || 'Flexible'),
+      'Notes: ' + (notes || 'None')
+    ].join('\n');
+
+    const number = business.whatsapp.replace(/\D/g, '');
+    if (config.enableWhatsApp && number) {
+      window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    }
+  });
+};
+
+const initQuickBooking = (business, config) => {
+  const form = q('#quick-book-form');
+  if (!form || !config.enableBooking || !config.enableWhatsApp) return;
+
+  const date = q('#quick-date', form);
+  setLocalDateMinimum(date);
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const service = String(q('#quick-service', form)?.value || '').trim();
+    const preferredDate = String(date?.value || '').trim();
+    const preferredTime = String(q('#quick-time', form)?.value || '').trim();
+    if (!service) {
+      q('#quick-service', form)?.focus();
+      return;
+    }
+
+    const displayDate = preferredDate
+      ? new Intl.DateTimeFormat('en-ZA', { weekday:'short', day:'numeric', month:'short' }).format(new Date(preferredDate + 'T12:00:00'))
+      : 'Not specified';
+
+    const message = [
+      'Hi ' + business.name + ',',
+      "I'd like to book.",
+      '',
+      'Service: ' + service,
+      'Preferred date: ' + displayDate,
+      'Preferred time: ' + (preferredTime || 'Flexible')
+    ].join('\n');
+
+    const number = business.whatsapp.replace(/\D/g, '');
+    if (number) {
+      window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    }
+  });
+};
+
 const initialiseBusiness = async (business, config) => {
   const number = business.whatsapp.replace(/\D/g, '');
-  const bookingMessage = business.bookingMessage || `Hi ${business.name}, I'd like to book an appointment.`;
+  const bookingMessage = business.bookingMessage || ("Hi " + business.name + ", I'd like to book an appointment.");
 
   if (config.enableWhatsApp && number) {
     qa('.booking-link').forEach((link) => {
-      link.href = `https://wa.me/${number}?text=${encodeURIComponent(bookingMessage)}`;
+      link.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
     });
@@ -148,65 +266,60 @@ const initialiseBusiness = async (business, config) => {
   if (hours && Array.isArray(business.openingHours)) {
     hours.replaceChildren(...business.openingHours.map(([day, time]) => {
       const item = document.createElement('li');
-      item.textContent = `${day}: ${time}`;
+      item.textContent = day + ': ' + time;
       return item;
     }));
   }
 
-  const dateInput = q('#date');
-  if (dateInput) {
-    const today = new Date();
-    const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-      .toISOString().slice(0, 10);
-    dateInput.min = localDate;
+  const mapLink = q('#contact-map-link');
+  if (mapLink && config.enableMap && business.mapUrl) {
+    mapLink.href = business.mapUrl;
+    mapLink.target = '_blank';
+    mapLink.rel = 'noopener noreferrer';
+    mapLink.hidden = false;
   }
 
   if (!config.enableBooking) return;
-
-  q('#booking-form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const service = String(form.get('service') || '').trim();
-    const date = String(form.get('date') || '').trim();
-    const time = String(form.get('time') || '').trim();
-    const note = String(form.get('note') || '').trim();
-
-    if (!service) {
-      q('#service')?.focus();
-      return;
-    }
-
-    const message = `Hi ${business.name},
-I'd like to book an appointment.
-
-Service: ${service}
-Preferred date: ${date || 'Not specified'}
-Preferred time: ${time || 'Not specified'}
-Notes: ${note || 'None'}`;
-
-    if (config.enableWhatsApp && number) {
-      window.location.href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-    }
-  });
+  initBookingForm(business, config);
+  initQuickBooking(business, config);
 };
 
-const initialiseServices = async (services, config) => {
-  if (!config.enableBooking) return;
-  const select = q('#service');
+const populateServiceSelect = (select, services) => {
   if (!select || !Array.isArray(services)) return;
-
-  const current = select.value;
   const options = [new Option('Choose a service', '')];
 
   services.flatMap((group) => group.services.map((service) => ({
     ...service,
     category: group.category
   }))).forEach((service) => {
-    options.push(new Option(`${service.name} · ${service.price}`, service.name));
+    options.push(new Option(service.name + ' · ' + service.price, service.name));
   });
 
   select.replaceChildren(...options);
-  if (current) select.value = current;
+};
+
+const initialiseServices = async (services, config) => {
+  if (!Array.isArray(services)) return;
+
+  [q('#service'), q('#quick-service')].forEach((select) => {
+    if (select) populateServiceSelect(select, services);
+  });
+
+  const requestedService = new URLSearchParams(window.location.search).get('service');
+  const bookingSelect = q('#service');
+  if (requestedService && bookingSelect) {
+    const matching = [...bookingSelect.options].find((option) => option.value === requestedService);
+    if (matching) {
+      bookingSelect.value = matching.value;
+      q('#booking-selection')?.replaceChildren(document.createTextNode('Selected service: ' + matching.textContent));
+    }
+  }
+
+  qa('[data-category-jump]').forEach((jump) => {
+    jump.addEventListener('click', () => {
+      qa('[data-category-jump]').forEach((item) => item.classList.toggle('active', item === jump));
+    });
+  });
 };
 
 initNavigation();
@@ -214,13 +327,15 @@ initYear();
 initGalleryFilters();
 initGalleryLightbox();
 initMediaFallbacks();
+initServiceBookLinks();
 
 Promise.all([
-  import(`${root}data/business.js`),
-  import(`${root}data/services.js`),
-  import(`${root}config/site-config.js`)
+  import(root + 'data/business.js'),
+  import(root + 'data/services.js'),
+  import(root + 'config/site-config.js')
 ])
   .then(([{ business }, { services }, { siteConfig }]) => {
+    initStickyActions(business, siteConfig);
     return Promise.all([
       initialiseBusiness(business, siteConfig),
       initialiseServices(services, siteConfig)
