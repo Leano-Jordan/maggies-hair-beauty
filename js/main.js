@@ -178,8 +178,9 @@ const initServiceBookLinks = () => {
       const service = String(link.dataset.bookService || '').trim();
       if (!service) return;
       event.preventDefault();
-      const separator = link.href.includes('?') ? '&' : '?';
-      window.location.href = link.href + separator + 'service=' + encodeURIComponent(service);
+      const target = new URL(link.getAttribute('href') || 'contact.html', window.location.href);
+      target.searchParams.set('service', service);
+      window.location.href = target.href;
     });
   });
 };
@@ -275,11 +276,18 @@ const initialiseBusiness = async (business, config) => {
   const number = business.whatsapp.replace(/\D/g, '');
   const bookingMessage = business.bookingMessage || ("Hi " + business.name + ", I'd like to book an appointment.");
 
-  if (config.enableWhatsApp && number) {
+  if (config.enableBooking) {
+    const bookingPath = root + 'contact.html';
     qa('.booking-link').forEach((link) => {
-      link.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      if (link.dataset.directWhatsapp === 'true' && config.enableWhatsApp && number) {
+        link.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        return;
+      }
+      link.href = bookingPath;
+      link.target = '';
+      link.rel = '';
     });
   }
 
