@@ -138,3 +138,11 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Current branch truth: only `main`.
 - Current evidence state: source verified and static regression verified; rendered browser/device/Lighthouse evidence remains a separate gate.
 
+
+
+## Mags V9 Mobile/Image Hardening — 2026-10-08
+- Browser verification is reported green; mobile has a whole-page horizontal-scroll defect.
+- Hardened global mobile containment with clipped horizontal overflow and explicit `min-width:0` on major grid children to prevent intrinsic-content/grid tracks from widening the viewport.
+- Audited the image layer: production pages were still sourcing editorial imagery from Pexels at runtime. Added an automated GitHub Pages-compatible materialization pipeline that downloads the existing approved editorial set into `assets/images/editorial/`, creates responsive WebP sizes, and rewrites page image references to local repo assets.
+- The materialization workflow is currently running; final local-asset verification remains pending until the workflow commits its generated assets.
+- Image composition contract remains: explicit dimensions, responsive `srcset`/sizes, lazy loading below the fold, and deliberate `object-fit:cover`/object-position by composition.
