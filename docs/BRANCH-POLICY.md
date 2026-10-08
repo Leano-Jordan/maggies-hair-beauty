@@ -12,7 +12,7 @@ Maggie’s Hair & Beauty uses a **single development branch: main**.
 
 ## Repository hygiene
 
-The repository currently contains legacy side branches from earlier V2 iterations. They are not part of the intended architecture and should be deleted once repository administration access permits branch deletion.
+The repository has been consolidated to the intended single-branch model. Current branch audit: `main` only.
 
 ## Quality gate
 
