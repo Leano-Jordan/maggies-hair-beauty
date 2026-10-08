@@ -103,8 +103,15 @@ const initVerifiedProof = (business, config) => {
 const initMediaFallbacks = () => {
   qa('img').forEach((image) => {
     image.addEventListener('error', () => {
-      image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media')
-        ?.classList.add('media-failed');
+      const frame = image.closest('.image-frame, .page-hero-media, .hero-art, .gallery-tile, .contact-photo, .image-card, .services-hero-image, .service-showcase-media, .about-hero-art');
+      frame?.classList.add('media-failed');
+      if (frame && !frame.querySelector('.media-fallback')) {
+        const fallback = document.createElement('span');
+        fallback.className = 'media-fallback';
+        fallback.setAttribute('role', 'status');
+        fallback.textContent = 'Image unavailable';
+        frame.append(fallback);
+      }
     }, { once:true });
   });
 };
@@ -139,9 +146,15 @@ const initGalleryLightbox = () => {
 
   const closeDialog = () => {
     if (dialog.open) dialog.close();
+    image.hidden = false;
     trigger?.focus();
     trigger = null;
   };
+
+  image.addEventListener('error', () => {
+    image.hidden = true;
+    title.textContent = 'This image could not be loaded. Please close the viewer and try another image.';
+  });
 
   qa('.gallery-tile[data-lightbox]').forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -226,6 +239,12 @@ const initBookingForm = (business, config) => {
   const timeWindow = q('#time-window', form);
   const note = q('#note', form);
   setLocalDateMinimum(date);
+  const feedback = q('#booking-feedback', form);
+  if (!business.whatsapp || !String(business.whatsapp).replace(/\D/g, '')) {
+    const submit = q('button[type="submit"]', form);
+    if (submit) submit.disabled = true;
+    if (feedback) { feedback.hidden = false; feedback.textContent = 'WhatsApp booking is not configured yet. Please use the phone or map contact options.'; }
+  }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -258,6 +277,12 @@ const initBookingForm = (business, config) => {
     const number = business.whatsapp.replace(/\D/g, '');
     if (config.enableWhatsApp && number) {
       window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    } else {
+      const feedback = q('#booking-feedback', form);
+      if (feedback) {
+        feedback.hidden = false;
+        feedback.textContent = 'WhatsApp booking is temporarily unavailable. Please use the salon contact details above.';
+      }
     }
   });
 };
@@ -290,6 +315,12 @@ const initQuickBooking = (business, config) => {
     const number = business.whatsapp.replace(/\D/g, '');
     if (number) {
       window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    } else {
+      const feedback = q('#quick-book-feedback', form);
+      if (feedback) {
+        feedback.hidden = false;
+        feedback.textContent = 'WhatsApp booking is temporarily unavailable. Please use the contact details below.';
+      }
     }
   });
 };
