@@ -140,3 +140,6 @@
 .booking-direct-fallback{display:inline-block;margin-top:.15rem;color:var(--rose-deep);font-size:.75rem;font-weight:850;text-underline-offset:.2em}
 .booking-form button:disabled{cursor:not-allowed;opacity:.55;transform:none;box-shadow:none}
 @media(max-width:520px){.booking-direct-fallback{padding:.35rem 0}.media-fallback{min-height:8rem}}
+
+
+.gallery-filter-empty{margin:1rem 0 0;padding:1rem 1.1rem;border-left:2px solid var(--champagne);background:var(--surface);color:var(--muted);font-size:.78rem;font-weight:750}
