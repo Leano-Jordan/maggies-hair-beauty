@@ -12,3 +12,36 @@ html.js .primary-nav{z-index:31}
 @media(prefers-reduced-motion:reduce){
   html.js .primary-nav{transition:none}
 }
+
+/* Mags premium conversion layer */
+.concierge-booking .quick-book-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.9fr) auto}
+.concierge-lead{margin:0 0 .8rem;color:var(--muted);font:500 1rem/1.35 var(--font-head);max-width:34rem}
+.concierge-trust{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.75rem}
+.concierge-trust span{padding:.38rem .58rem;border:1px solid var(--line);color:var(--ink-soft);font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.4)}
+.premium-ritual-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.premium-ritual-card .lookbook-body{display:flex;flex-direction:column}
+.premium-ritual-card .lookbook-meta{margin-top:auto}
+.service-addons{margin:-2rem 0 4rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.service-addon-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.service-addon{display:grid;gap:.25rem;padding:1rem;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.service-addon strong{font:600 1.15rem/1.05 var(--font-head)}
+.service-addon span{color:var(--muted);font-size:.72rem}
+.service-addon:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.tier-pricing{display:grid;grid-template-columns:.85fr 1.15fr;gap:1.5rem;margin:0 0 5rem;padding:1.35rem;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.tier-pricing h3{margin:.3rem 0 .45rem;font-size:1.65rem}
+.tier-pricing p:not(.eyebrow){margin:0;color:var(--muted);font-size:.8rem;line-height:1.55}
+.tier-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.tier-grid>div{display:grid;align-content:start;gap:.35rem;padding:.85rem;border-left:1px solid var(--line)}
+.tier-grid span{font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.tier-grid strong{font:600 1.35rem/1 var(--font-head);color:var(--rose-dark)}
+.tier-grid small{color:var(--muted);font-size:.68rem;line-height:1.45}
+@media(max-width:1050px){
+  .premium-ritual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tier-pricing{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .concierge-booking .quick-book-grid{grid-template-columns:1fr}
+  .service-addon-row,.tier-grid{grid-template-columns:1fr}
+  .tier-grid>div{border-left:0;border-top:1px solid var(--line)}
+  .tier-grid>div:first-child{border-top:0}
+}
