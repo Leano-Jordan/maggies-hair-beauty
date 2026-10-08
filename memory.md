@@ -82,3 +82,20 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Source verification passed for canonical metadata, social metadata, demo index gate, responsive image attributes and image-origin preconnect across all five core pages.
 - Browser/Lighthouse/device verification remains outstanding; this pass is source-verified only.
 - Production SEO gate remains: replace demo business/contact/pricing/content, enable indexing, add verified LocalBusiness/BeautySalon structured data, publish sitemap.xml, then run rendered Lighthouse/Core Web Vitals and search-indexing checks.
+
+
+## Mags V6 Premium Client Conversion + SEO — 2026-10-08
+- Supplied client details integrated: client name Mmabatho Moagi; business location Akasia, Pretoria North; booking/phone number +27 82 076 2001.
+- Reworked homepage booking interaction into a concierge-style WhatsApp flow: refresh goal + availability + direct availability CTA.
+- Replaced budget-led homepage featured services with premium Signature Rituals: Lived-In Colour Ritual, Cloud Curl + Cut, Glass Skin Facial and Scalp Reset.
+- Added service add-ons and stylist tier presentation; premium pricing is a commercial positioning proposal and should be confirmed with the client before final publishing.
+- Updated services data contract to include descriptions, add-ons and optional stylist tiers.
+- Updated Contact page with client location, phone, WhatsApp-first availability and answer-focused FAQs.
+- Added FAQPage structured data for balayage pricing and glass-skin facial.
+- Added BeautySalon structured data on Home using the supplied location/phone without inventing a street address.
+- Enabled indexing, opened robots.txt and added sitemap.xml for the GitHub Pages deployment.
+- Removed stale demo contact text and preview labels from customer-facing HTML while keeping portfolio honesty: stock/editorial imagery is described as a lookbook/reference rather than falsely presented as client work.
+- Responsive image optimization remains active across core pages with srcset/sizes, intrinsic dimensions where practical, lazy loading for secondary images and prioritized hero media.
+- Source-level regression checks: all five core pages indexable, canonicalized and OG-enabled; no malformed closing tags; all Pexels image elements in core pages have responsive sources; stale demo phone/address/email strings removed.
+- Live browser inspection through this environment was not independently available; user reports the GitHub Pages deployment is updating normally. Production visual/device verification remains a separate evidence gate.
+- Do not publish unverified review counts, certifications, exact opening hours, Google Business Profile claims or client before/after imagery until supplied/connected.
