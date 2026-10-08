@@ -1,7 +1,7 @@
 .site-header{position:sticky;top:0;z-index:30;background:rgba(244,240,232,.94);border-bottom:1px solid rgba(89,74,60,.16)}
 @supports(backdrop-filter:blur(10px)){.site-header{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}}
 .header-inner{position:relative;min-height:5rem;display:flex;align-items:center;gap:1.5rem}
-.brand{display:inline-flex;align-items:baseline;gap:.5rem;font:600 1.55rem/1 var(--font-head);letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+.brand{display:inline-flex;align-items:baseline;gap:.5rem;min-width:0;font:600 1.55rem/1 var(--font-head);letter-spacing:-.01em;text-decoration:none;white-space:normal;overflow-wrap:break-word}
 .brand span{font:600 .72rem/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .primary-nav{display:flex;align-items:center;gap:1.5rem;margin-left:auto}
 .primary-nav a{position:relative;padding:.5rem 0;color:var(--ink-soft);font-size:.78rem;font-weight:800;text-decoration:none}
