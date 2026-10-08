@@ -528,44 +528,5 @@ const initReviewWidget = (business) => {
   });
 };
 
-const loadScript = (src) => new Promise((resolve,reject) => {
-  const existing = document.querySelector('script[src="' + src + '"]');
-  if (existing) return resolve();
-  const script = document.createElement('script');
-  script.src = src; script.async = true;
-  script.onload = resolve; script.onerror = reject;
-  document.head.appendChild(script);
-});
-
-const initPremiumMotion = async () => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  try {
-    await Promise.all([
-      loadScript('https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js'),
-      loadScript('https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js')
-    ]);
-    await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js');
-    if (!window.gsap || !window.ScrollTrigger || !window.Lenis) return;
-    const {gsap, ScrollTrigger, Lenis} = window;
-    gsap.registerPlugin(ScrollTrigger);
-    const lenis = new Lenis({lerp:0.08,smoothWheel:true,autoRaf:false});
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.from('.hero h1',{clipPath:'inset(0 0 100% 0)',duration:1,ease:'power3.out'});
-    gsap.from('.service-card',{y:24,autoAlpha:0,duration:.8,stagger:.08,ease:'power2.out',scrollTrigger:{trigger:'.service-card-grid',start:'top 85%'}});
-    gsap.utils.toArray('.reveal-image').forEach((card)=>gsap.from(card.querySelector('.lookbook-image'),{clipPath:'inset(100% 0 0 0)',scale:1.08,duration:1,ease:'power2.out',scrollTrigger:{trigger:card,start:'top 85%'}}));
-    gsap.utils.toArray('.parallax').forEach((el)=>gsap.to(el,{yPercent:-30,ease:'none',scrollTrigger:{trigger:el.closest('.hero')||el,scrub:1,start:'top top',end:'bottom top'}}));
-    gsap.utils.toArray('.approach-stack article').forEach((card,i)=>gsap.from(card,{y:24,autoAlpha:0,duration:.8,delay:i*.08,ease:'power2.out',scrollTrigger:{trigger:card,start:'top 88%'}}));
-    gsap.utils.toArray('.btn').forEach((button)=>button.addEventListener('mouseenter',()=>gsap.to(button,{y:-4,duration:.2,ease:'power2.out'})));
-    gsap.utils.toArray('.lookbook-card img').forEach((img)=>img.addEventListener('mouseenter',()=>gsap.to(img,{scale:1.05,duration:.4,ease:'power2.out'})));
-    gsap.utils.toArray('.lookbook-card img').forEach((img)=>img.addEventListener('mouseleave',()=>gsap.to(img,{scale:1,duration:.4,ease:'power2.out'})));
-    ScrollTrigger.refresh();
-  } catch(error) {
-    console.warn('Premium motion unavailable; native scrolling retained.', error);
-  }
-};
-
 initComparisonSliders();
 initLuxuryMotionLegacy();
-initPremiumMotion();
