@@ -1,5 +1,5 @@
-html{scroll-behavior:smooth}html.lenis,html.lenis body{height:auto}html.lenis.lenis-smooth{scroll-behavior:auto!important}html.lenis.lenis-stopped{overflow:hidden}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html{scroll-behavior:smooth;max-width:100%;overflow-x:clip}html.lenis,html.lenis body{height:auto}html.lenis.lenis-smooth{scroll-behavior:auto!important}html.lenis.lenis-stopped{overflow:hidden}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+body{margin:0;max-width:100%;overflow-x:clip;background:var(--paper);color:var(--ink);font:400 1rem/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 h1,h2,h3,p,ul,ol,blockquote,figure,fieldset{margin-top:0}
 h1,h2,h3{font-family:var(--font-head);font-weight:500;line-height:.98;letter-spacing:-.025em}
 h1{font-size:clamp(3.35rem,7vw,6.8rem);max-width:10ch;margin-bottom:1.1rem}
@@ -9,7 +9,8 @@ p{margin-bottom:1rem}
 a{color:inherit}
 button,input,select,textarea{font:inherit}
 img,video{max-width:100%}
-.container{width:min(calc(100% - 2.5rem),var(--container));margin-inline:auto}
+.container{width:min(calc(100% - 2.5rem),var(--container));margin-inline:auto;min-width:0}
+.hero-grid>*,.page-hero-grid>*,.split-grid>*,.services-hero-grid>*,.about-hero-grid>*,.contact-grid>*,.service-showcase>*,.about-story-intro>*,.about-next-step>*{min-width:0}
 .section{padding:6.25rem 0}
 .section-tint{background:var(--cream-deep)}
 .section-dark{background:var(--berry);color:var(--white)}
