@@ -15,6 +15,20 @@ const isCurrentContactPage = () => {
 const getBookingPath = () => isCurrentContactPage() ? '#booking' : getContactPath() + '#booking';
 const getLocationPath = () => isCurrentContactPage() ? '#visit' : getContactPath() + '#visit';
 const getWhatsAppNumber = (business) => String(business?.whatsapp || '').replace(/\D/g, '');
+const getBusinessName = (business) => {
+  const name = String(business?.name || '').trim();
+  return name || "Maggie's Hair & Beauty";
+};
+const getBookingMessage = (business) => {
+  const message = String(business?.bookingMessage || '').trim();
+  return message || "Hi " + getBusinessName(business) + ", I'd like to book an appointment.";
+};
+const getWhatsAppUrl = (business, message) => {
+  const number = getWhatsAppNumber(business);
+  return number && message
+    ? 'https://wa.me/' + number + '?text=' + encodeURIComponent(message)
+    : '';
+};
 const isUsableExternalUrl = (value) => {
   try { return ['http:', 'https:'].includes(new URL(String(value || '')).protocol); }
   catch { return false; }
@@ -318,15 +332,14 @@ const initBookingForm = (business = {}, config = {}) => {
       displayDate = new Intl.DateTimeFormat('en-ZA', { weekday:'long', day:'numeric', month:'long' }).format(parsedDate);
     }
 
-    const businessName = String(business?.name || "Maggie's Hair & Beauty").trim();
     const message = [
-      "Hi " + businessName + ", I'd like " + serviceName + " on " + displayDate + " at " + (preferredTime || 'a flexible time') + ".",
+      "Hi " + getBusinessName(business) + ", I'd like " + serviceName + " on " + displayDate + " at " + (preferredTime || 'a flexible time') + ".",
       notes ? "Notes: " + notes : ""
     ].filter(Boolean).join('\n');
 
-    const number = getWhatsAppNumber(business);
-    if (config.enableWhatsApp && number) {
-      window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    const whatsappUrl = getWhatsAppUrl(business, message);
+    if (config.enableWhatsApp && whatsappUrl) {
+      window.location.href = whatsappUrl;
     } else {
       const feedback = q('#booking-feedback', form);
       if (feedback) {
@@ -358,14 +371,13 @@ const initQuickBooking = (business = {}, config = {}) => {
       return;
     }
 
-    const businessName = String(business?.name || "Maggie's Hair & Beauty").trim();
     const message = [
-      "Hi " + businessName + ", I'd like " + refreshGoal + " on " + whenFree + "."
+      "Hi " + getBusinessName(business) + ", I'd like " + refreshGoal + " on " + whenFree + "."
     ].join('\n');
 
-    const number = getWhatsAppNumber(business);
-    if (number) {
-      window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+    const whatsappUrl = getWhatsAppUrl(business, message);
+    if (whatsappUrl) {
+      window.location.href = whatsappUrl;
     } else {
       const feedback = q('#quick-book-feedback', form);
       if (feedback) {
@@ -377,14 +389,14 @@ const initQuickBooking = (business = {}, config = {}) => {
 };
 
 const initialiseBusiness = async (business = {}, config = {}) => {
-  const number = getWhatsAppNumber(business);
-  const bookingMessage = business.bookingMessage || ("Hi " + business.name + ", I'd like to book an appointment.");
+  const bookingMessage = getBookingMessage(business);
+  const whatsappUrl = config.enableWhatsApp ? getWhatsAppUrl(business, bookingMessage) : '';
 
   if (config.enableBooking) {
     const bookingPath = getBookingPath();
     qa('.booking-link').forEach((link) => {
-      if (link.dataset.directWhatsapp === 'true' && config.enableWhatsApp && number) {
-        link.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
+      if (link.dataset.directWhatsapp === 'true' && whatsappUrl) {
+        link.href = whatsappUrl;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         return;
@@ -421,11 +433,11 @@ const initialiseBusiness = async (business = {}, config = {}) => {
 
   const directFallback = q('.booking-direct-fallback');
   if (directFallback) {
-    const hasWhatsApp = Boolean(config.enableWhatsApp && number);
+    const hasWhatsApp = Boolean(whatsappUrl);
     const phone = String(business?.phone || '').trim();
     if (hasWhatsApp) {
       directFallback.hidden = false;
-      directFallback.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
+      directFallback.href = whatsappUrl;
       directFallback.target = '_blank';
       directFallback.rel = 'noopener noreferrer';
       directFallback.textContent = 'Prefer WhatsApp directly? Open the chat →';
