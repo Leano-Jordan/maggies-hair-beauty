@@ -10,10 +10,9 @@ A reusable, progressively enhanced static commercial website foundation for salo
 - Centralized business, service and social data
 - Service pricing/duration presentation with native expandable details
 - Smart WhatsApp booking with service, preferred date and time-window prefill
-- Homepage quick-book funnel plus service-specific booking links
 - Sticky mobile booking/location actions
 - Gallery filters and accessible lightbox
-- Replaceable image areas with provenance guidance
+- Replaceable image areas with provenance tracking and production-proof gates
 - Accessibility, browser-support and commercial handover documentation
 - Dependency-light HTML5, CSS3 and vanilla ES-module JavaScript
 
@@ -45,8 +44,8 @@ Chrome, Edge, Firefox and Safari on desktop; Chrome Android, Safari iOS and Sams
 
 ## Commercialization notes
 
-Maggie’s is fictional demonstration content. Replace business information, prices, testimonials, imagery, map destination and any other business-specific material before client delivery. Demo pages remain `noindex,nofollow` until the production identity and SEO metadata are ready.
+Maggie’s currently uses the configured Akasia/Pretoria North business contact details and premium service positioning. Verified Google metrics, client reviews, before/after work and refill claims are data-gated until approved sources are supplied.
 
-This demo deliberately does not invent Google reviews, team identities or client before/after claims. Add those only from verified, client-approved sources.
+Do not publish Google ratings/counts, response-time claims, reviews, before/after transformations or product/refill claims until they are present in their approved data sources.
 
 Review `commercial/` and `docs/` before handover, especially deployment, rebranding, browser support and image licensing guidance.
