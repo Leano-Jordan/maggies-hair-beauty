@@ -5,6 +5,7 @@ const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)]
 
 const MOBILE_BREAKPOINT = 800;
 const root = document.body?.dataset.root || '';
+const getBookingPath = () => root ? root + 'contact.html' : 'pages/contact.html';
 
 const setContactField = (id, value, type) => {
   const element = q('#' + id);
@@ -147,12 +148,12 @@ const initStickyActions = (business, config) => {
 
   const booking = document.createElement('a');
   booking.className = 'mobile-action booking-link';
-  booking.href = root + 'contact.html';
+  booking.href = getBookingPath();
   booking.innerHTML = '<span aria-hidden="true">WA</span><span>Fast booking</span>';
 
   const location = document.createElement('a');
   location.className = 'mobile-action location-link';
-  location.href = business.mapUrl || (root + 'contact.html#visit');
+  location.href = business.mapUrl || (getBookingPath() + '#visit');
   location.setAttribute('aria-label', 'Open salon location');
   location.innerHTML = '<span aria-hidden="true">⌖</span><span>Location</span>';
 
@@ -282,7 +283,7 @@ const initialiseBusiness = async (business, config) => {
   const bookingMessage = business.bookingMessage || ("Hi " + business.name + ", I'd like to book an appointment.");
 
   if (config.enableBooking) {
-    const bookingPath = root + 'contact.html';
+    const bookingPath = getBookingPath();
     qa('.booking-link').forEach((link) => {
       if (link.dataset.directWhatsapp === 'true' && config.enableWhatsApp && number) {
         link.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(bookingMessage);
