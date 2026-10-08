@@ -60,34 +60,33 @@
         <a class="btn btn-outline" href="pages/services.html">View services</a>
       </div>
 
-      <form class="quick-book-form" id="quick-book-form">
-        <fieldset>
-          <legend>Start with the basics</legend>
-          <div class="quick-book-grid">
-            <div class="quick-book-field">
-              <label for="quick-service">Service</label>
-              <select id="quick-service" name="service" required>
-                <option value="">Choose a service</option>
-              </select>
-            </div>
-            <div class="quick-book-field">
-              <label for="quick-date">Preferred date</label>
-              <input id="quick-date" name="date" type="date">
-            </div>
-            <div class="quick-book-field">
-              <label for="quick-time">Time window</label>
-              <select id="quick-time" name="time">
-                <option value="">Flexible</option>
-                <option>Morning · 09:00–12:00</option>
-                <option>Afternoon · 12:00–15:00</option>
-                <option>Late afternoon · 15:00–18:00</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" type="submit">Continue to WhatsApp</button>
-          </div>
-          <p class="quick-book-note">Your choices are carried into WhatsApp. No account or booking platform required.</p>
-        </fieldset>
-      </form>
+      <form class="quick-book-form concierge-booking" id="quick-book-form">
+  <fieldset>
+    <legend>Beauty, made personal.</legend>
+    <p class="concierge-lead">Tell us what you want to refresh, we’ll build the service around it.</p>
+    <div class="quick-book-grid">
+      <div class="quick-book-field">
+        <label for="quick-refresh">What do you want to refresh?</label>
+        <select id="quick-refresh" name="refresh" required>
+          <option value="">Choose an area</option>
+          <option>Hair Colour</option>
+          <option>Cut &amp; Style</option>
+          <option>Skin</option>
+          <option>Scalp &amp; Hair Care</option>
+          <option>Nails</option>
+        </select>
+      </div>
+      <div class="quick-book-field">
+        <label for="quick-availability">When are you free?</label>
+        <input id="quick-availability" name="availability" type="text" placeholder="e.g. Saturday morning" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Check availability on WhatsApp →</button>
+    </div>
+    <div class="concierge-trust" aria-label="Booking benefits">
+      <span>Signature rituals</span><span>Personalised consultation</span><span>Pretoria North</span>
+    </div>
+  </fieldset>
+</form>
     </div>
 
     <div class="hero-art hero-cinematic">
@@ -135,51 +134,65 @@
 <section class="section luxury-section">
   <div class="container">
     <div class="section-heading editorial-heading">
-      <p class="eyebrow">Featured services</p>
-      <h2>Good choices should be easy to compare.</h2>
-      <p>Representative demo pricing keeps the decision simple. Replace these values with the salon’s verified menu before launch.</p>
+      <p class="eyebrow">Signature rituals</p>
+      <h2>High-touch services, designed around the result.</h2>
+      <p>Start with a signature ritual or ask us to shape the appointment around your hair, skin or beauty goals.</p>
     </div>
 
-    <div class="lookbook-grid">
-      <article class="lookbook-card">
+    <div class="lookbook-grid premium-ritual-grid">
+      <article class="lookbook-card premium-ritual-card">
         <div class="lookbook-image">
-          <img src="https://images.pexels.com/photos/7388963/pexels-photo-7388963.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" srcset="https://images.pexels.com/photos/7388963/pexels-photo-7388963.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w, https://images.pexels.com/photos/7388963/pexels-photo-7388963.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=768 768w, https://images.pexels.com/photos/7388963/pexels-photo-7388963.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200 1200w" sizes="(max-width: 800px) 100vw, 33vw" alt="Client receiving professional hairstyling" loading="lazy" decoding="async">
-          <span>Hair</span>
+          <img src="https://images.pexels.com/photos/7388963/pexels-photo-7388963.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Editorial reference for a professional hair styling session" loading="lazy" decoding="async">
+          <span>Hair · Signature</span>
         </div>
         <div class="lookbook-body">
-          <p class="card-kicker">CUT &amp; STYLE</p>
-          <h3>Ladies Cut &amp; Style</h3>
-          <p>Consultation, wash, cut and blow-dry.</p>
-          <div class="lookbook-meta"><span>60 min</span><strong>R350</strong></div>
-          <a class="btn btn-outline service-book-link" data-book-service="Ladies Cut &amp; Style" href="pages/contact.html">Book this service</a>
+          <p class="card-kicker">DIMENSIONAL COLOUR</p>
+          <h3>Lived-In Colour Ritual</h3>
+          <p>Balayage, gloss, bond repair and a polished blowout for dimensional, lower-maintenance colour.</p>
+          <div class="lookbook-meta"><span>150 min</span><strong>From R1,450</strong></div>
+          <a class="btn btn-outline service-book-link" data-book-service="Lived-In Colour Ritual" href="pages/contact.html">Check availability</a>
         </div>
       </article>
 
-      <article class="lookbook-card">
+      <article class="lookbook-card premium-ritual-card">
         <div class="lookbook-image">
-          <img src="https://images.pexels.com/photos/25471958/pexels-photo-25471958.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" srcset="https://images.pexels.com/photos/25471958/pexels-photo-25471958.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w, https://images.pexels.com/photos/25471958/pexels-photo-25471958.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=768 768w, https://images.pexels.com/photos/25471958/pexels-photo-25471958.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200 1200w" sizes="(max-width: 800px) 100vw, 33vw" alt="Client receiving polished beauty styling" loading="lazy" decoding="async">
-          <span>Beauty</span>
+          <img src="https://images.pexels.com/photos/3993453/pexels-photo-3993453.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Editorial reference for textured hair styling" loading="lazy" decoding="async">
+          <span>Hair · Signature</span>
         </div>
         <div class="lookbook-body">
-          <p class="card-kicker">FACIAL</p>
-          <h3>Express Facial</h3>
-          <p>Cleanse, exfoliate, mask and moisturise.</p>
-          <div class="lookbook-meta"><span>45 min</span><strong>R450</strong></div>
-          <a class="btn btn-outline service-book-link" data-book-service="Express Facial" href="pages/contact.html">Book this service</a>
+          <p class="card-kicker">CURL &amp; SHAPE</p>
+          <h3>Cloud Curl + Cut</h3>
+          <p>Consultation, wash, signature curl-focused cut and cloud curl styling.</p>
+          <div class="lookbook-meta"><span>75 min</span><strong>R850</strong></div>
+          <a class="btn btn-outline service-book-link" data-book-service="Cloud Curl + Cut" href="pages/contact.html">Check availability</a>
         </div>
       </article>
 
-      <article class="lookbook-card">
+      <article class="lookbook-card premium-ritual-card">
         <div class="lookbook-image">
-          <img src="https://images.pexels.com/photos/16363472/pexels-photo-16363472.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" srcset="https://images.pexels.com/photos/16363472/pexels-photo-16363472.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w, https://images.pexels.com/photos/16363472/pexels-photo-16363472.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=768 768w, https://images.pexels.com/photos/16363472/pexels-photo-16363472.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200 1200w" sizes="(max-width: 800px) 100vw, 33vw" alt="Detailed nail service in a modern salon" loading="lazy" decoding="async">
-          <span>Nails</span>
+          <img src="https://images.pexels.com/photos/25471958/pexels-photo-25471958.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Editorial reference for a premium facial experience" loading="lazy" decoding="async">
+          <span>Skin · Signature</span>
         </div>
         <div class="lookbook-body">
-          <p class="card-kicker">GEL MANICURE</p>
-          <h3>Gel Manicure</h3>
-          <p>Shape, cuticle care and gel polish.</p>
-          <div class="lookbook-meta"><span>60 min</span><strong>R320</strong></div>
-          <a class="btn btn-outline service-book-link" data-book-service="Gel Manicure" href="pages/contact.html">Book this service</a>
+          <p class="card-kicker">SKIN RITUAL</p>
+          <h3>Glass Skin Facial</h3>
+          <p>A K-beauty inspired cleanse, exfoliation, hydration and glow-focused facial ritual.</p>
+          <div class="lookbook-meta"><span>60 min</span><strong>R750</strong></div>
+          <a class="btn btn-outline service-book-link" data-book-service="Glass Skin Facial" href="pages/contact.html">Check availability</a>
+        </div>
+      </article>
+
+      <article class="lookbook-card premium-ritual-card">
+        <div class="lookbook-image">
+          <img src="https://images.pexels.com/photos/7755454/pexels-photo-7755454.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Editorial reference for a restorative scalp and hair treatment" loading="lazy" decoding="async">
+          <span>Hair · Care</span>
+        </div>
+        <div class="lookbook-body">
+          <p class="card-kicker">SCALP &amp; CARE</p>
+          <h3>Scalp Reset</h3>
+          <p>A targeted scalp cleanse, treatment ritual and blowout.</p>
+          <div class="lookbook-meta"><span>60 min</span><strong>R650</strong></div>
+          <a class="btn btn-outline service-book-link" data-book-service="Scalp Reset" href="pages/contact.html">Check availability</a>
         </div>
       </article>
     </div>
@@ -209,9 +222,9 @@
   <div class="container">
     <div class="section-heading split-heading">
       <div>
-        <p class="eyebrow">A little inspiration</p>
-        <h2>See the kind of finish the site is built to showcase.</h2>
-        <p>Use real client-approved work here in production. This preview uses curated stock photography to establish the visual structure.</p>
+        <p class="eyebrow">The lookbook</p>
+        <h2>See the finishes we want to create.</h2>
+        <p>A curated lookbook sets the visual direction. Client-approved transformations can be added here as the portfolio grows.</p>
       </div>
       <a class="text-link" href="pages/gallery.html">View full gallery <span aria-hidden="true">→</span></a>
     </div>
@@ -273,15 +286,15 @@
   <div class="container footer-grid">
     <div>
       <a class="brand" href="index.html">Maggie’s <span>Hair & Beauty</span></a>
-      <p class="footer-copy">Reusable salon website foundation.</p>
+      <p class="footer-copy">A considered salon experience in Akasia, Pretoria North.</p>
     </div>
     <div><h2>Visit</h2><p id="footer-address">123 Church Street<br>Pretoria, Gauteng</p></div>
     <div><h2>Contact</h2><p><a id="footer-phone" href="tel:+27123456789">+27 12 345 6789</a><br><a id="footer-email" href="mailto:hello@maggieshair.co.za">hello@maggieshair.co.za</a></p></div>
   </div>
   <div class="container footer-bottom">
-    <p>© <span id="year"></span> Maggie’s Hair &amp; Beauty. Demo content only.</p>
-    <span class="sa-mark">Template preview · Pretoria concept</span>
-    <span class="sa-badge" aria-label="Template preview"><i aria-hidden="true"></i><b>PREVIEW</b> TEMPLATE</span>
+    <p>© <span id="year"></span> Maggie’s Hair &amp; Beauty.</p>
+    <span class="sa-mark">Akasia · Pretoria North</span>
+    <span class="sa-badge" aria-label="Maggie’s Hair &amp; Beauty"><i aria-hidden="true"></i><b>AKASIA</b> PRETORIA NORTH</span>
   </div>
 </footer>
 
