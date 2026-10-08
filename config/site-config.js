@@ -5,5 +5,8 @@ export const siteConfig={
   enableWhatsApp:true,
   enableSocialLinks:true,
   enableBooking:true,
-  enableMap:true
+  enableMap:true,
+  enablePremiumMotion:true,
+  enableSocialProof:true,
+  enableRefillShelf:true
 };
