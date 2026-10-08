@@ -15,5 +15,5 @@ export const business={
     whatsappResponseTime:null
   },
   refillOffer:"",
-  bookingMessage:"Hi Maggie's Hair & Beauty, I'd like [Service] on [Date] at [Time]."
+  bookingMessage:"Hi Maggie's Hair & Beauty, I'd like to check availability for an appointment."
 };
