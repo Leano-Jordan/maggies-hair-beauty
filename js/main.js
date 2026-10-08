@@ -305,11 +305,19 @@ const initialiseBusiness = async (business, config) => {
 
   const hours = q('#hours-list');
   if (hours && Array.isArray(business.openingHours)) {
-    hours.replaceChildren(...business.openingHours.map(([day, time]) => {
+    const entries = business.openingHours
+      .filter((entry) => Array.isArray(entry) && entry.length >= 2 && entry[0] && entry[1]);
+    if (entries.length) {
+      hours.replaceChildren(...entries.map(([day, time]) => {
+        const item = document.createElement('li');
+        item.textContent = day + ': ' + time;
+        return item;
+      }));
+    } else {
       const item = document.createElement('li');
-      item.textContent = day + ': ' + time;
-      return item;
-    }));
+      item.textContent = 'Availability is confirmed directly on WhatsApp.';
+      hours.replaceChildren(item);
+    }
   }
 
   const mapLink = q('#contact-map-link');
