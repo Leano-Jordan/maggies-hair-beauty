@@ -206,6 +206,13 @@ const initBookingForm = (business, config) => {
       return;
     }
 
+    if (preferredDate && date?.min && preferredDate < date.min) {
+      date.setCustomValidity('Please choose today or a future date.');
+      date.reportValidity();
+      return;
+    }
+    date?.setCustomValidity('');
+
     const displayDate = preferredDate
       ? new Intl.DateTimeFormat('en-ZA', { weekday:'long', day:'numeric', month:'long' }).format(new Date(preferredDate + 'T12:00:00'))
       : 'Not specified';
@@ -358,6 +365,7 @@ Promise.all([
 ])
   .then(([{ business }, { services }, { siteConfig }]) => {
     initStickyActions(business, siteConfig);
+    initReviewWidget(business);
     return Promise.all([
       initialiseBusiness(business, siteConfig),
       initialiseServices(services, siteConfig)
@@ -398,11 +406,11 @@ const initLuxuryMotion = () => {
   }, { passive: true });
 };
 
-const initReviewWidget = () => {
+const initReviewWidget = (business) => {
   qa('[data-review-widget]').forEach((widget) => {
     const score = q('.review-score strong', widget);
     const quote = q('[data-review-quote]', widget);
-    const profile = business.googleBusinessProfileUrl || '';
+    const profile = business?.googleBusinessProfileUrl || '';
     if (profile && score && quote) {
       quote.textContent = 'Verified reviews will appear here when the salon’s approved Google Business Profile source is connected.';
       widget.dataset.connected = 'true';
@@ -413,4 +421,3 @@ const initReviewWidget = () => {
 
 initComparisonSliders();
 initLuxuryMotion();
-initReviewWidget();
