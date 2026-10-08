@@ -1,0 +1,42 @@
+name: Materialize local editorial images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "pages/**.html"
+      - "scripts/materialize-images.py"
+      - ".github/workflows/materialize-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Prepare image tooling
+        run: python -m pip install --upgrade pillow
+
+      - name: Download and optimize editorial images
+        run: python scripts/materialize-images.py
+
+      - name: Commit local image assets
+        run: |
+          git config user.name "Mags Director"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/editorial index.html pages
+          if git diff --cached --quiet; then
+            echo "No image materialization changes."
+            exit 0
+          fi
+          git commit -m "materialize editorial images locally"
+          git push origin main
