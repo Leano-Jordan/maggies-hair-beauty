@@ -1,30 +1,25 @@
-:focus-visible
-{
-    outline:3px solid #1c6b9d;
-    outline-offset:3px
+:focus-visible{
+  outline:2px solid var(--rose);
+  outline-offset:3px
 }
-.skip-link
-{
-    position:absolute;
-        left:-9999px;
-        z-index:100
-    }
-    .skip-link:focus
-    {
-        top:1rem;
-        left:1rem;
-        padding:.7rem 1rem;
-        background:#fff;
-        color:#000;
-        box-shadow:0 0 0 3px #1c6b9d
-    }
-
-    @media(prefers-reduced-motion:reduce)
-{
-    *,*::before,*::after
-    {
-        scroll-behavior:auto!important;
-        transition:none!important;
-        animation:none!important
-    }
+.skip-link{
+  position:absolute;
+  left:-9999px;
+  top:1rem;
+  z-index:100;
+  padding:.7rem 1rem;
+  background:var(--berry);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:var(--shadow-soft)
+}
+.skip-link:focus{
+  left:1rem
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important
+  }
 }
