@@ -66,7 +66,7 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 
 ## Mags V4 Visual Quality Sweep — 2026-10-08
 - Attempted live visual inspection of the deployed GitHub Pages site using a screenshot-capable browser fetch at 390x844.
-- Live visual capture was blocked by the connected Firecrawl account's insufficient credits; therefore no claim of pixel-level browser verification is made.
+- Live visual capture was unavailable in this execution; therefore no claim of pixel-level browser verification is made.
 - Performed a source-level visual hardening pass instead, focused on hero image layering, overlay z-index, image positioning and content-card stacking.
 - Confirmed the redesigned homepage has no remote video hero, uses a dedicated hero image contract, and retains the mobile navigation/action-bar system.
 - The next visual gate remains real rendered screenshots at 320x844, 390x844, 768x1024 and 1440px widths once browser/screenshot access is available.
@@ -101,7 +101,7 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Do not publish unverified review counts, certifications, exact opening hours, Google Business Profile claims or client before/after imagery until supplied/connected.
 
 ## Mags V7 Browser/Mobile/Defect/SEO/Performance Audit — 2026-10-08
-- Attempted live browser inspection for the deployed GitHub Pages site, but connected Firecrawl browser/scrape access was unavailable because the account had insufficient credits; direct live-page retrieval was also unavailable in this execution. Browser/device evidence is therefore not claimed.
+- Attempted live browser inspection for the deployed GitHub Pages site, but connected browser/screenshot retrieval was unavailable in this execution; direct live-page retrieval was also unavailable. Browser/device evidence is therefore not claimed.
 - Source audit of main found and fixed a high-severity booking-path defect: root-level homepage booking and mobile-action links could resolve to `contact.html` instead of `pages/contact.html`. A shared `getBookingPath()` contract now preserves correct root and subpage routing.
 - Fixed WhatsApp data divergence between `data/business.js`, `data/social.js` and the Contact no-JavaScript fallback.
 - Fixed service-price drift in `pages/services.html` so Brow Shape & Tint, Gel Manicure and Luxury Pedicure match `data/services.js`, the authoritative service source.
@@ -120,3 +120,21 @@ Review `commercial/` and `docs/` before handover, especially deployment, rebrand
 - Removed the duplicate motion engine from `main.js` and removed the redundant homepage CDN tags. Premium motion is now governed by the existing `enablePremiumMotion` configuration and its dedicated `js/motion.js` progressive-enhancement layer.
 - Synced branch documentation with the verified repository state: `main` is currently the only branch.
 - Remaining evidence gate: live browser/device/Lighthouse verification is still required; this audit is source-verified only.
+
+## Mags V8 Premium Editorial Conversion — 2026-10-08
+- Re-audited current main for stale business/demo content and implementation drift.
+- Current configured identity remains Maggie's Hair & Beauty / Mmabatho Moagi / Akasia, Pretoria North / +27 82 076 2001.
+- Premium visual system is now warm-neutral: #F9F6F3 background, #1A1A1A primary text, #8A7F7A secondary text, #D6C7B8 accent, Fraunces headings and Inter body.
+- Homepage uses an editorial split hero, two clear CTAs, proof-gated trust signals and four Signature Rituals rather than a form-first hero.
+- Featured ritual hierarchy is Lived-In Colour Ritual from R1,450; Cloud Curl + Signature Cut from R850; Glass Skin Facial R750; Scalp Reset + Blowout R650.
+- Lower-price services remain in the complete booking catalogue but are not used as the primary featured anchor.
+- Proof claims are verification-gated: Google rating/count, response-time claim, real Google reviews, six before/after pairs and refill merchandising render only when approved data exists.
+- Editorial imagery is presentation material only; gallery labels no longer imply that stock images are completed client transformations.
+- `data/portfolio.js` is the approved transformation source and intentionally starts empty; six approved pairs are required before that section renders.
+- Premium motion is consolidated in `js/motion.js` using GSAP + ScrollTrigger + Lenis with lerp 0.08 and only the approved five motion patterns.
+- Concierge booking now emits the requested compact WhatsApp message format: Hi Maggie's, I'd like [Service] on [Date] at [Time]. Optional notes are appended only when supplied.
+- Restored the full Nails booking catalogue and kept service-specific booking state synchronized with service data.
+- Updated V2 specification, README, customisation guidance and image provenance documentation; stale project docs were corrected to distinguish current configured identity from unsupported proof.
+- Current branch truth: only `main`.
+- Current evidence state: source verified and static regression verified; rendered browser/device/Lighthouse evidence remains a separate gate.
+
