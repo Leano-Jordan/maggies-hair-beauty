@@ -75,6 +75,31 @@ const initYear = () => {
   if (year) year.textContent = String(new Date().getFullYear());
 };
 
+const initVerifiedProof = (business, config) => {
+  const proof = business?.proof || {};
+  qa('[data-proof-strip]').forEach((strip) => {
+    const google = q('[data-google-proof]', strip);
+    const validRating = Number.isFinite(Number(proof.googleRating)) && Number(proof.googleRating) > 0;
+    const validCount = Number.isFinite(Number(proof.googleReviewCount)) && Number(proof.googleReviewCount) > 0;
+    if (google && validRating && validCount && config.enableSocialProof) {
+      google.textContent = Number(proof.googleRating).toFixed(1) + '★ Google (' + Number(proof.googleReviewCount) + '+)';
+      google.hidden = false;
+    } else if (google) {
+      google.hidden = true;
+    }
+  });
+
+  qa('[data-reply-time]').forEach((element) => {
+    const minutes = Number(proof.whatsappResponseTime);
+    if (Number.isFinite(minutes) && minutes > 0) {
+      element.textContent = 'Usually replies in ' + minutes + ' mins';
+      element.hidden = false;
+    } else {
+      element.hidden = true;
+    }
+  });
+};
+
 const initMediaFallbacks = () => {
   qa('img').forEach((image) => {
     image.addEventListener('error', () => {
@@ -384,9 +409,15 @@ Promise.all([
   import(root + 'data/business.js'),
   import(root + 'data/services.js'),
   import(root + 'config/site-config.js')
-])
+]).then(([businessModule, servicesModule, configModule]) => {
+  if (configModule.siteConfig.enablePremiumMotion) {
+    import(root + 'js/motion.js').catch(() => {});
+  }
+  return Promise.all([businessModule, servicesModule, configModule]);
+})
   .then(([{ business }, { services }, { siteConfig }]) => {
     initStickyActions(business, siteConfig);
+    initVerifiedProof(business, siteConfig);
     initReviewWidget(business);
     return Promise.all([
       initialiseBusiness(business, siteConfig),
