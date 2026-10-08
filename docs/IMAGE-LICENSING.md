@@ -1,17 +1,28 @@
 # Image Licensing / Provenance
 
-The current visual demo uses distinct Pexels stock photographs hosted through the Pexels image CDN. They are presentation imagery only and do not represent verified Maggie's Hair & Beauty client work.
+The current visual layer uses remote Pexels stock photography as editorial presentation material. It is not represented as verified Maggie's client work.
 
-Pexels pages used for this round explicitly identify the selected photographs as free to use. Retained assets should still be rechecked at handover because third-party licensing terms and source availability can change.
+## Current selected sources
+- Natural-curl portrait direction: Pexels photo 20417319.
+- Braided-hair direction: Pexels photo 7506935.
+- Brown-skin skincare direction: Pexels photo 5938592.
+- Neutral/brunette direction: Pexels photo 6774277.
+- Salon styling direction: Pexels photo 9545499.
+- Soft-light hair direction: Pexels photo 5473284.
 
-Before production delivery:
-1. Replace demo imagery with buyer-owned or properly licensed photography where practical.
-2. Verify the current license and provenance of every retained third-party image.
-3. Remove unused demo image references where the buyer does not want external hosting.
-4. Keep image replacement points intact so the design does not need restructuring.
-5. Do not introduce AI-generated imagery as a substitute for real stock or client photography.
-6. The official Proudly South African logo is not bundled in this demo. Public membership guidance states that approved members receive access to the official brand assets. If a buyer is an approved member and wants the official mark, obtain the official asset from the organisation/member portal and follow its current brand guidelines.
+The image selection is intended to improve neutral, warm and racially balanced visual direction while preserving the existing replaceable `<img>` architecture.
 
-Current demo source: Pexels (`https://www.pexels.com/`).
+## Production rule
+Approved client photography replaces the editorial set before the site is presented as a portfolio of Maggie's work. Do not label stock/editorial images as client transformations, reviews or completed business results.
 
-No client-specific photography is represented as verified business material.
+## Replacement points
+- `index.html` hero and featured rituals
+- `pages/services.html` service imagery
+- `pages/gallery.html` gallery imagery
+- `pages/about.html` hero imagery
+- `pages/contact.html` contact imagery
+
+Keep explicit image dimensions, `srcset`, `sizes`, descriptive `alt` text and `object-fit:cover` so replacement does not require layout restructuring.
+
+## Source policy
+Re-check the current license/provenance of retained third-party images at handover. Replace remote imagery with buyer-owned or properly licensed assets when practical.
