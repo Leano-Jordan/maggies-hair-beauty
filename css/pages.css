@@ -252,3 +252,7 @@
   .about-next-step .button-row{flex-direction:column}
   .about-next-step .btn{width:100%}
 }
+
+
+/* Luxury editorial responsive refinements */
+@media(max-width:800px){.hero-cinematic{min-height:34rem}.hero-cinematic .hero-card{max-width:85%}}

@@ -364,3 +364,53 @@ Promise.all([
     ]);
   })
   .catch((error) => console.warn('Optional site enhancements unavailable:', error));
+
+const initComparisonSliders = () => {
+  qa('[data-comparison]').forEach((card) => {
+    const range = q('.comparison-range', card);
+    const before = q('.comparison-before', card);
+    const handle = q('.comparison-handle', card);
+    if (!range || !before || !handle) return;
+    const sync = () => {
+      const value = Number(range.value);
+      before.style.width = value + '%';
+      handle.style.left = value + '%';
+    };
+    range.addEventListener('input', sync);
+    sync();
+  });
+};
+
+const initLuxuryMotion = () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layers = qa('[data-parallax]');
+  if (!layers.length) return;
+  let ticking = false;
+  const update = () => {
+    const y = Math.min(window.scrollY * 0.06, 28);
+    layers.forEach((layer) => layer.style.transform = 'translate3d(0,' + y + 'px,0)');
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+};
+
+const initReviewWidget = () => {
+  qa('[data-review-widget]').forEach((widget) => {
+    const score = q('.review-score strong', widget);
+    const quote = q('[data-review-quote]', widget);
+    const profile = business.googleBusinessProfileUrl || '';
+    if (profile && score && quote) {
+      quote.textContent = 'Verified reviews will appear here when the salon’s approved Google Business Profile source is connected.';
+      widget.dataset.connected = 'true';
+      widget.setAttribute('data-profile-url', profile);
+    }
+  });
+};
+
+initComparisonSliders();
+initLuxuryMotion();
+initReviewWidget();
