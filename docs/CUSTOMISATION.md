@@ -17,3 +17,10 @@ Use `css/variables.css` for colours, type, spacing, radii and shadows. Replace i
 
 ## Production truth
 Do not publish demo addresses, phone numbers, prices, testimonials, social destinations or stock imagery as verified client facts. Replace them before indexing or client handover.
+
+## Premium proof gates
+Edit `data/business.js` to add verified Google rating/count and WhatsApp response time only after client approval. Set `refillOffer` only when refill availability is verified.
+
+Edit `data/testimonials.js` with at least two approved Google reviews containing name, suburb, review text, source and `verified:true` before the social-proof section will render.
+
+Edit `data/portfolio.js` with six approved before/after pairs before the transformations section will render. The current repository intentionally leaves these arrays empty rather than fabricating proof.
