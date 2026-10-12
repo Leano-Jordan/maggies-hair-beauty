@@ -170,6 +170,14 @@ Stop implementation only when:
 
 When stopped, state exactly what remains and why.
 
+## Mandatory client-facing identity boundary
+
+Rosscore Labs is the business; the Founder is its owner, not the customer-facing identity. Follow the canonical company rule in `Leano-Jordan/Rosscore-Labs/docs/ROSCOR_CLIENT_FACING_IDENTITY_STANDARD.md` whenever writing or reviewing product pages, pre-launch pages, marketing, outreach, proposals, demos, sales copy or customer communications.
+
+Lead with the product and its commercial value. Never frame a prospect's signup, purchase, feedback or demo request as support for the Founder personally. Do not volunteer irrelevant personal circumstances or imply the customer owes a response. Let prospects decide independently. Professional presentation must remain truthful: never invent headcount, teams, customers, testimonials, partnerships, capabilities, scarcity or availability. Internal operational documents may state founder-led/solo-operated facts when materially relevant; do not confuse internal truth with external brand presentation.
+
+This rule is mandatory for every Director and specialist. Do not make the Founder repeat it.
+
 ## Parent contract
 Company-wide Rosscore Labs rules belong to Ross. This contract is the project-specific execution layer for Mags and may be stricter than the parent contract, but must not contradict it.
 
