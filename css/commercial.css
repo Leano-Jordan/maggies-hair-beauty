@@ -203,3 +203,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(prefers-reduced-motion:reduce){
   .hero-image,.lookbook-image img,.service-card,.premium-card,.lookbook-card{transition:none!important}
 }
+
+
+/* Final resilience layer: fallback surfaces, readable overlays and touch-safe controls. */
+.media-failed{display:grid;place-items:center;min-height:12rem;background:linear-gradient(135deg,#f8eee8,#ead8df)}
+.media-failed img{visibility:hidden}
+.media-failed .media-fallback{
+  position:absolute;inset:auto 1rem 1rem;z-index:2;max-width:22rem;
+  padding:.7rem .85rem;background:rgba(255,250,245,.96);color:#3c2638;
+  border:1px solid rgba(216,197,186,.8);font-size:.78rem;font-weight:700;
+}
+.mobile-action-bar{
+  border-color:rgba(216,197,186,.9);
+  background:rgba(255,250,245,.97);
+}
+.mobile-action:first-child{background:var(--berry);color:#fff}
+.mobile-action:last-child{color:var(--berry)}
+.primary-nav a:focus-visible,.brand:focus-visible,.text-link:focus-visible{
+  outline:3px solid var(--rose-dark);outline-offset:4px;border-radius:2px;
+}
+.btn:focus-visible{outline-color:#7e2942}
+img{background-color:rgba(234,216,223,.18)}
+@media(max-width:800px){
+  .header-inner{gap:.65rem}
+  .brand{font-size:1.35rem}
+  .brand span{font-size:.62rem;letter-spacing:.08em}
+  .primary-nav{border-radius:0 0 .45rem .45rem}
+}
+@media(max-width:380px){
+  .brand{font-size:1.15rem}
+  .brand span{font-size:.55rem}
+  .header-inner{gap:.4rem}
+  .nav-toggle{flex:0 0 2.6rem;width:2.6rem;height:2.6rem}
+  .hero h1{font-size:clamp(2.8rem,13vw,3.4rem)}
+}
