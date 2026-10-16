@@ -121,3 +121,85 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .service-card,.premium-card,.lookbook-card,.content-card{transition:none}
   .service-card:hover,.premium-card:hover,.lookbook-card:hover{transform:none}
 }
+
+
+/* Cohesion pass: shared rhythm, consistent page heroes, calmer surfaces and predictable cards. */
+:root{
+  --page-gutter:clamp(1.25rem,4vw,2.5rem);
+  --section-space:clamp(4rem,7vw,6.25rem);
+}
+.container{width:min(calc(100% - var(--page-gutter)*2),var(--container))}
+.section{padding-block:var(--section-space)}
+.section-heading{margin-bottom:clamp(1.75rem,3vw,2.6rem)}
+.section-heading h2{max-width:15ch}
+.hero-grid{gap:clamp(2.5rem,5vw,5.25rem)}
+.hero-grid>div:first-child{max-width:42rem}
+.hero h1{max-width:9.5ch;line-height:.92;letter-spacing:-.045em}
+.hero-lead{max-width:36rem}
+.hero-art{border-radius:.35rem 3.5rem .35rem 3.5rem}
+.hero-image{filter:saturate(.9) contrast(1.01)}
+/* Bring secondary pages into the same colour story as the home page. */
+.services-page .services-hero,
+.about-page .about-hero-v2,
+.page-hero{
+  background:
+    radial-gradient(ellipse at 92% 8%,rgba(242,167,126,.22),transparent 35%),
+    linear-gradient(125deg,#fff8f1 0%,#fff1e9 58%,#f6e4e2 100%);
+}
+.services-hero-note,.section-dark{background:linear-gradient(120deg,#342532 0%,#4a2c40 100%)}
+.services-hero-note span{color:#f2b58c}
+.service-card,.premium-card,.lookbook-card,.luxury-service-card,.approach-card,.content-card{
+  border-radius:.45rem;
+}
+.service-card,.premium-card,.lookbook-card,.luxury-service-card{
+  box-shadow:0 8px 24px rgba(60,38,56,.055);
+}
+.service-card:hover,.premium-card:hover,.lookbook-card:hover{
+  box-shadow:0 16px 34px rgba(60,38,56,.12);
+}
+.lookbook-image img,.service-showcase-media img,.services-hero-image img,.about-hero-image{
+  filter:saturate(.94);
+}
+.lookbook-body{padding:clamp(1rem,1.8vw,1.35rem)}
+.lookbook-body h3{line-height:1.04;letter-spacing:-.02em}
+.tier-row{display:flex;flex-wrap:wrap;gap:.35rem}
+.tier-row span{padding:.3rem .45rem;background:#f8eee8;border:1px solid #ecddd5;border-radius:.2rem;font-size:.65rem;line-height:1.4;color:#51404b}
+.site-footer{background:#fffdfb}
+.site-footer .brand{color:var(--ink)}
+.site-footer a:hover{color:var(--rose-dark)}
+/* Avoid transform jitter on touch screens and honour reduced motion. */
+@media(hover:none){
+  .service-card:hover,.premium-card:hover,.lookbook-card:hover{transform:none}
+}
+@media(max-width:1000px){
+  .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(18rem,.9fr);gap:2rem}
+  .hero h1{font-size:clamp(3.6rem,6.6vw,5.5rem)}
+  .premium-ritual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:800px){
+  .hero-grid{grid-template-columns:1fr;gap:1.5rem;padding-block:3.4rem}
+  .hero-grid>div:first-child{padding-block:0}
+  .hero h1{font-size:clamp(3.4rem,12vw,5.4rem);max-width:10ch}
+  .hero-art{min-height:0;aspect-ratio:4/4.2;border-radius:.35rem 2.5rem .35rem 2.5rem}
+  .hero-image{position:absolute}
+  .section{padding-block:clamp(3.5rem,11vw,4.7rem)}
+  .section-heading h2{max-width:17ch}
+  .premium-ritual-grid{grid-template-columns:1fr}
+  .lookbook-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+  .lookbook-image{height:100%;min-height:18rem;aspect-ratio:auto}
+  .lookbook-body{align-self:stretch}
+  .lookbook-body .btn{width:100%;margin-top:.5rem}
+}
+@media(max-width:560px){
+  .hero-grid{padding-block:2.6rem 3.2rem}
+  .hero h1{font-size:clamp(3.1rem,14vw,4.2rem);line-height:.95}
+  .hero-lead{font-size:1rem}
+  .hero-art{aspect-ratio:4/4.5}
+  .lookbook-card{grid-template-columns:1fr}
+  .lookbook-image{aspect-ratio:5/4;min-height:0}
+  .lookbook-body{padding:1.1rem}
+  .section-heading h2{font-size:clamp(2.25rem,10vw,3.2rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-image,.lookbook-image img,.service-card,.premium-card,.lookbook-card{transition:none!important}
+}
