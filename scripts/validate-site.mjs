@@ -34,6 +34,11 @@ for (const file of htmlFiles) {
   const rel = path.relative(root, file);
   const ids = new Set([...html.matchAll(/\bid=["']([^"']+)["']/g)].map((m) => m[1]));
 
+  for (const match of html.matchAll(/\bhref=["']#([^"']+)["']/gi)) {
+    const fragment = match[1];
+    if (!ids.has(fragment)) errors.push(rel + ': missing in-page anchor #' + fragment);
+  }
+
   for (const match of html.matchAll(/\b(?:href|src)=["']([^"'#][^"']*)["']/gi)) {
     const raw = match[1].trim();
     if (/^(?:https?:|mailto:|tel:|data:|javascript:|\/\/)/i.test(raw)) continue;
