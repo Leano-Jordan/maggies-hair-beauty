@@ -20,6 +20,8 @@ Read [docs/PRODUCTION-READINESS-AUDIT.md](docs/PRODUCTION-READINESS-AUDIT.md) be
 - Gallery filters and accessible lightbox
 - Replaceable image areas with provenance tracking and production-proof gates
 - Accessibility, browser-support and commercial handover documentation
+- Dependency-free static integrity validator (`node scripts/validate-site.mjs`)
+- GitHub Actions quality workflow for local links, assets, in-page anchors, document metadata and JSON-LD syntax
 - Dependency-light HTML5, CSS3 and vanilla ES-module JavaScript
 
 ## Customize first
