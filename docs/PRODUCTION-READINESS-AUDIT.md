@@ -12,7 +12,7 @@
 ### P0 — Confirm before public commercial use
 
 1. **Business identity, contact and consent.** `data/business.js` contains a named client field, phone/WhatsApp number, and a broad location. Confirm the business owner authorised public use of the name, number, brand and details. Do not publish private personal contact information without explicit approval. Confirm that the displayed map pin represents the actual customer-facing location; current URL searches the general Akasia/Pretoria North area rather than a verified street address.
-2. **Price presentation aligned in this audit branch; owner approval still required.** Cloud Curl and Scalp Reset now display `from R450` where the configured Junior Stylist tier is R450, while tier prices remain visible. This resolves the obvious headline/minimum mismatch in the reviewed homepage, services page and service data. It does not prove these prices are commercially correct: obtain owner sign-off for every service, tier, duration, inclusion and add-on before launch.
+2. **Price presentation aligned in this audit branch; owner approval still required.** Cloud Curl and Scalp Reset now display `from R450` where the configured Junior Stylist tier is R450, including the homepage, service overview, expandable menu and service data. This resolves the visible headline/minimum mismatch found during source review. It does not prove these prices are commercially correct: obtain owner sign-off for every service, tier, duration, inclusion and add-on before launch.
 3. **Image rights and authenticity.** Gallery/hero imagery appears editorial/stock-oriented based on filenames and alt text. Confirm each asset's licence and intended use. Label illustrative editorial images as inspiration; do not present stock imagery as the salon's own client work, transformations or results.
 4. **Production claims.** Keep Google ratings/review counts, testimonials, response-time promises, refill offers, opening hours, and treatment/health claims disabled or absent unless supported by owner-approved evidence. Never fabricate reviews or imply a booking is confirmed before the business confirms it.
 
@@ -45,11 +45,11 @@
 ## Recommended execution order
 
 1. Resolve owner approval, price conflicts, image provenance and the real location.
-2. Run a repeatable automated link/asset/HTML/metadata check.
+2. Run `node scripts/validate-site.mjs` locally and confirm the new GitHub Actions `Site quality` workflow passes. The validator checks local links/assets, in-page anchors, titles, language, main landmarks and JSON-LD syntax; it is a static integrity check, not a full HTML/accessibility audit.
 3. Complete real-browser booking and accessibility tests.
 4. Measure production performance and validate SEO.
 5. Ship only after the release gate is signed off.
 
 ## Limits of this audit
 
-This is a source-based review of selected repository files. It is not a legal certification, penetration test, full WCAG conformance audit, independent visual regression run, or verified live deployment test. Responsive rendering is acknowledged based on the project owner's confirmation.
+A dependency-free static validator and GitHub Actions workflow have been added on the audit branch; a passing run has not yet been confirmed in this audit. This is a source-based review of selected repository files. It is not a legal certification, penetration test, full WCAG conformance audit, independent visual regression run, or verified live deployment test. Responsive rendering is acknowledged based on the project owner's confirmation.
